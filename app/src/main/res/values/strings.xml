@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Nafj</string>
+    <string name="mobile_no">Mobile No.</string>
+    <string name="submitNumberText">Please submit your mobile no. to continue</string>
+    <string name="_0000000000">0000000000</string>
+    <string name="_91">+91</string>
+    <string name="next">next</string>
+    <string name="submitOtpText">"Please enter the OTP sent via SMS on "</string>
+    <string name="otp">OTP</string>
+    <string name="did_not_receive_the_otp">Did not receive the OTP?</string>
+    <string name="resend_otp">RESEND OTP</string>
+    <string name="incorrect_otp_entered">Incorrect OTP entered..</string>
+</resources>

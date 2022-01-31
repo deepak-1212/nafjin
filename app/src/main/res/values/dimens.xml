@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="textHeaderSize">16sp</dimen>
+    <dimen name="textOtpSize">16sp</dimen>
+    <dimen name="textHeaderPadding">10dp</dimen>
+    <dimen name="textHeaderMargin">10dp</dimen>
+    <dimen name="textLightHeaderSize">12sp</dimen>
+    <dimen name="textLightHeaderPadding">10dp</dimen>
+    <dimen name="textLightHeaderMargin">10dp</dimen>
+
+    <dimen name="textSubHeaderSize">14sp</dimen>
+    <dimen name="textSubHeaderPadding">10dp</dimen>
+    <dimen name="textSubHeaderMargin">8dp</dimen>
+
+    <dimen name="editTextHeightView">40dp</dimen>
+
+    <dimen name="bottom_sheet_margin">16dp</dimen>
+
+</resources>
