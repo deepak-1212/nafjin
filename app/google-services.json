@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "500183006921",
+    "project_id": "nafjin-8dad7",
+    "storage_bucket": "nafjin-8dad7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500183006921:android:90d1e4d0391012754d5718",
+        "android_client_info": {
+          "package_name": "in.nafj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500183006921-uqp6l3l06heghic02u4mnsmhk2scf42k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR3UB3RDg87KOqTW2yYxs_RvH3JgoHbWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500183006921-uqp6l3l06heghic02u4mnsmhk2scf42k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
