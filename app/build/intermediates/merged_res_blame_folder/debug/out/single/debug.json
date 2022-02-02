@@ -1,0 +1,130 @@
+[
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\font_barlow_medium.ttf.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\font\\barlow_medium.ttf"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\drawable_otp_with_boxes.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\drawable\\otp_with_boxes.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_view_cart.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\activity_view_cart.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_profile.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\activity_profile.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\font_barlow_italic.ttf.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\font\\barlow_italic.ttf"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_sub_category_listing.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\activity_sub_category_listing.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\font_playfair_display_medium_italic.ttf.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\font\\playfair_display_medium_italic.ttf"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_launcher_background.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_login.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\font_barlow_bold.ttf.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\font\\barlow_bold.ttf"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_login_otp.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\activity_login_otp.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_sign_up.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\activity_sign_up.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\drawable-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\font_barlow_semi_bold.ttf.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\font\\barlow_semi_bold.ttf"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_category_listing.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\activity_category_listing.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\font_barlow_regular.ttf.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\font\\barlow_regular.ttf"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\layout_app_icon_name.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\app_icon_name.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\font_barlow_light.ttf.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\font\\barlow_light.ttf"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_product_listing.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\activity_product_listing.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_view_product.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\activity_view_product.xml"
+    }
+]

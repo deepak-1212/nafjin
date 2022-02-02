@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                       
+                                                   
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.LoginActivity" android:tag="layout/activity_login_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
+
+       <include
+           android:id="@+id/appIconName"
+           layout="@layout/app_icon_name"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/submitNumberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/textHeaderMargin"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/barlow_medium"
+            android:padding="@dimen/textSubHeaderPadding"
+            android:text="@string/submitNumberText"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/textSubHeaderSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appIconName" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/submitNumberText">
+
+            <TextView
+                android:id="@+id/mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/textLightHeaderMargin"
+                android:layout_marginStart="@dimen/textLightHeaderMargin"
+                android:paddingStart="@dimen/textLightHeaderPadding"
+                android:paddingTop="@dimen/textSubHeaderPadding"
+                android:paddingEnd="@dimen/textSubHeaderPadding"
+                android:text="@string/mobile_no"
+                android:textSize="@dimen/textLightHeaderSize" />
+
+            <FrameLayout
+                android:padding="@dimen/textLightHeaderPadding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/mobile_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/_0000000000"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/barlow_medium"
+                    android:textSize="@dimen/textHeaderSize"
+                    android:paddingBottom="8dp"
+                    android:paddingStart="35dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="8dp" >
+                    <requestFocus />
+                </androidx.appcompat.widget.AppCompatEditText>
+
+                <TextView
+                    android:id="@+id/prefix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/barlow_bold"
+                    android:paddingStart="8dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/textHeaderSize"
+                    android:text="@string/_91"
+                    tools:ignore="RtlSymmetry" />
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/nextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/brown"
+                android:layout_margin="@dimen/textHeaderMargin"
+                android:text="@string/next"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+         
