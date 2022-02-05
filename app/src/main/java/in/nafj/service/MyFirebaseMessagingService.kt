@@ -1,4 +1,4 @@
-package com.kintree.service
+package `in`.nafj.service
 
 import `in`.nafj.R
 import `in`.nafj.activity.HomeActivity
@@ -57,7 +57,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                  .build()*/
 
             val notificationChannel = NotificationChannel(
-                "Kintree",
+                getString(R.string.app_name),
                 "Test Notifications",
                 NotificationManager.IMPORTANCE_DEFAULT
             )
@@ -74,7 +74,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         notificationLayout.setTextViewText(R.id.content_title, notification!!.title)
         notificationLayout.setTextViewText(R.id.content_body, notification.body)*/
 
-        val notificationBuilder: Notification.Builder = Notification.Builder(this, "Kintree")
+        val notificationBuilder: Notification.Builder = Notification.Builder(this, getString(R.string.app_name))
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(notification["title"])
             .setContentText(notification["body"])

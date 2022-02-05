@@ -9,6 +9,8 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 
 private const val TAG = "LoginActivity"
 
@@ -30,6 +32,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
 
         binding.nextButton.setOnClickListener(this)
+        retrieveToken()
     }
 
     override fun onClick(v: View?) {
@@ -45,5 +48,19 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
         }
+    }
+
+    private fun retrieveToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("TAG", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            Log.i(TAG, "FCM token: $token")
+        })
     }
 }

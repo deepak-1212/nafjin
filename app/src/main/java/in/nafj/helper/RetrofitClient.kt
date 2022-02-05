@@ -1,4 +1,4 @@
-package com.kintree.helper
+package `in`.nafj.helper
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -11,6 +11,7 @@ class RetrofitClient {
 
     companion object {
         var url: String = Constants.url
+        val SMS_BASE_URL = "http://netsms.netcomindia.net/"
 
         var retrofit: Retrofit? = null
         var gson = GsonBuilder()
@@ -29,6 +30,14 @@ class RetrofitClient {
         fun getClient(): Retrofit? {
             retrofit = Retrofit.Builder().client(okhttpClient()).baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create(gson)).build()
+            return retrofit
+        }
+
+        fun getClientSms(): Retrofit? {
+            retrofit =
+                Retrofit.Builder().baseUrl(SMS_BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build()
             return retrofit
         }
 

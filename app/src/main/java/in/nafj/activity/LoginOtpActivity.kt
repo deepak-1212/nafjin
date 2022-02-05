@@ -3,6 +3,8 @@ package `in`.nafj.activity
 import `in`.nafj.R
 import `in`.nafj.databinding.ActivityLoginOtpBinding
 import `in`.nafj.helper.GenericTextWatcher
+import `in`.nafj.helper.RetrofitFunctions
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.util.Log
@@ -17,8 +19,46 @@ private const val TAG = "LoginOtpActivity"
 
 class LoginOtpActivity : AppCompatActivity(), View.OnClickListener {
 
+    interface SendOtpInterface {
+        fun onOtpSent(finalResRandom: String)
+        fun onOtpSendingFailed()
+    }
+
+    interface CreateRowInServerInterface {
+        fun onRowCreated()
+        fun onRowCreationFailed()
+    }
 
     private val editTextArray = ArrayList<EditText>()
+    private lateinit var passedNumber: String
+    private lateinit var progressDialog: ProgressDialog
+
+    private val sendOtpInterface = object : SendOtpInterface {
+        override fun onOtpSent(finalResRandom: String) {
+            showProgressBar(false)
+            RetrofitFunctions.createRecordInServer(
+                passedNumber,
+                createRowInServerInterface,
+                finalResRandom
+            )
+        }
+
+        override fun onOtpSendingFailed() {
+            showProgressBar(false)
+        }
+
+    }
+
+    private val createRowInServerInterface = object : CreateRowInServerInterface {
+        override fun onRowCreated() {
+            showProgressBar(false)
+        }
+
+        override fun onRowCreationFailed() {
+            showProgressBar(false)
+        }
+
+    }
 
     companion object {
         var otpEnteredCounter = ""
@@ -33,6 +73,17 @@ class LoginOtpActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login_otp)
+
+        passedNumber = intent.getStringExtra("number").toString()
+        val boldSpanned = SpannableStringBuilder().bold { append(passedNumber) }
+        binding.submitOtpText.append(boldSpanned)
+
+        progressDialog = ProgressDialog(this)
+        progressDialog.setCancelable(false)
+        progressDialog.setTitle("Sending OTP")
+
+        showProgressBar(true)
+        RetrofitFunctions.sendOtp(passedNumber, sendOtpInterface, getString(R.string.app_name))
 
         editTextArray.add(binding.otpEditBox1)
         editTextArray.add(binding.otpEditBox2)
@@ -78,10 +129,6 @@ class LoginOtpActivity : AppCompatActivity(), View.OnClickListener {
             )
         )
 
-        val passedNumber = intent.getStringExtra("number")
-        val boldSpanned = SpannableStringBuilder().bold { append(passedNumber.toString()) }
-        binding.submitOtpText.append(boldSpanned)
-
         binding.nextButton.setOnClickListener(this)
         binding.nextButton.isClickable = false
 
@@ -98,6 +145,14 @@ class LoginOtpActivity : AppCompatActivity(), View.OnClickListener {
                     binding.errorOtp.visibility = View.VISIBLE
                 }
             }
+        }
+    }
+
+    private fun showProgressBar(status: Boolean) {
+        if (status) {
+            progressDialog.dismiss()
+        } else {
+            progressDialog.show()
         }
     }
 }
