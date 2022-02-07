@@ -1,9 +1,10 @@
 package `in`.nafj.helper
 
+import `in`.nafj.activity.HomeActivity
 import `in`.nafj.activity.LoginOtpActivity
 import `in`.nafj.model.StoreOtpModel
 import android.util.Log
-import com.google.gson.JsonObject
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,8 +15,12 @@ private const val TAG = "RetrofitFunctions"
 
 class RetrofitFunctions {
     companion object {
-        fun sendOtp(passedNumber: String, sendOtpInterface: LoginOtpActivity.SendOtpInterface,
-                    appName: String) {
+        fun sendOtp(
+            passedNumber: String,
+            sendOtpInterface: LoginOtpActivity.SendOtpInterface,
+            appName: String,
+            firebaseToken: String
+        ) {
             val finalResRandom = DecimalFormat("000000").format(Random().nextInt(999999).toLong())
             println(finalResRandom)
 
@@ -24,23 +29,28 @@ class RetrofitFunctions {
 
             val retrofit = RetrofitClient.getClientSms()!!
             val retrofitApi = retrofit.create(RetrofitApi::class.java)
-            val call: Call<String?> = retrofitApi.sendSms(
-                "right2cart", "4de57e62ebXX",
-                "+91$passedNumber", message, "DALERT", "1", "DLT Number", "DLT Template ID"
+            val call: Call<ResponseBody> = retrofitApi.sendSms(
+                "nafj2022", "0a82df3400XX",
+                "+91$passedNumber", message, "INFOSM", "1", "DLT Number", "DLT Template ID"
             )
 
             Log.d(TAG, "onClick: " + call.request().url())
 
-            call.enqueue(object : Callback<String?> {
-                override fun onResponse(call: Call<String?>, response: Response<String?>) {
+            call.enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
                     Log.d(TAG, "onResponse: " + response.body())
-                    val result = response.body()
-                    if (result!!.contains("sent")) {
-                        sendOtpInterface.onOtpSent(finalResRandom)
-                    }
+                    val result = response.body()!!.string()
+                    if (result.contains("sent")) {
+                        sendOtpInterface.onOtpSent(finalResRandom, firebaseToken)
+                    } else
+                        sendOtpInterface.onOtpSendingFailed()
+
                 }
 
-                override fun onFailure(call: Call<String?>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     Log.d(TAG, "onFailure: " + t.message)
                     sendOtpInterface.onOtpSendingFailed()
 
@@ -48,32 +58,108 @@ class RetrofitFunctions {
             })
         }
 
+
         fun createRecordInServer(
             passedNumber: String,
             createRowInServerInterface: LoginOtpActivity.CreateRowInServerInterface,
-            finalResRandom: String
+            finalResRandom: String,
+            firebaseToken: String
         ) {
-            val retrofit = RetrofitClient.getClientSms()!!
+            val retrofit = RetrofitClient.getClient()!!
             val retrofitApi = retrofit.create(RetrofitApi::class.java)
-            val call: Call<JsonObject> = retrofitApi.storeOtp(StoreOtpModel(passedNumber, finalResRandom))
+            val call: Call<CreateRecordInServerResponse> =
+                retrofitApi.loginRegister(
+                    StoreOtpModel(
+                        passedNumber,
+                        finalResRandom,
+                        firebaseToken
+                    )
+                )
 
             Log.d(TAG, "onClick: " + call.request().url())
 
-            call.enqueue(object : Callback<JsonObject?> {
-                override fun onResponse(call: Call<JsonObject?>, response: Response<JsonObject?>) {
-                    Log.d(TAG, "onResponse: " + response.body())
+            call.enqueue(object : Callback<CreateRecordInServerResponse?> {
+                override fun onResponse(
+                    call: Call<CreateRecordInServerResponse?>,
+                    response: Response<CreateRecordInServerResponse?>
+                ) {
 
                     if (response.code() == 200) {
-                        val result = response.body()
-                        createRowInServerInterface.onRowCreated()
+                        val createRecordInServerResponse = response.body()!!
+                        if (createRecordInServerResponse.AffectedRows == 1)
+                            createRowInServerInterface.onRowCreated()
+                        else
+                            createRowInServerInterface.onRowCreationFailed()
                     }
                     createRowInServerInterface.onRowCreationFailed()
 
                 }
 
-                override fun onFailure(call: Call<JsonObject?>, t: Throwable) {
+                override fun onFailure(call: Call<CreateRecordInServerResponse?>, t: Throwable) {
                     Log.d(TAG, "onFailure: " + t.message)
                     createRowInServerInterface.onRowCreationFailed()
+
+                }
+            })
+        }
+
+        fun verifyOtp(
+            passedNumber: String,
+            verifyOtpInterface: LoginOtpActivity.VerifyOtpInterface,
+            otpEntered: String
+        ) {
+            val retrofit = RetrofitClient.getClient()!!
+            val retrofitApi = retrofit.create(RetrofitApi::class.java)
+            val call: Call<VerifyOtpResponse> =
+                retrofitApi.verifyOtp(StoreOtpModel(passedNumber, otpEntered))
+
+            Log.d(TAG, "onClick: " + call.request().url())
+
+            call.enqueue(object : Callback<VerifyOtpResponse?> {
+                override fun onResponse(
+                    call: Call<VerifyOtpResponse?>,
+                    response: Response<VerifyOtpResponse?>
+                ) {
+                    if (response.code() == 200) {
+                        val verifyOtpResponse = response.body()!!
+                        if (verifyOtpResponse.Otp.equals("Matched", true))
+                            verifyOtpInterface.onOtpVerified()
+                        else
+                            verifyOtpInterface.onOtpVerificationFailed()
+                    }
+                    verifyOtpInterface.onOtpVerificationFailed()
+                }
+
+                override fun onFailure(call: Call<VerifyOtpResponse?>, t: Throwable) {
+                    Log.d(TAG, "onFailure: " + t.message)
+                    verifyOtpInterface.onOtpVerificationFailed()
+
+                }
+            })
+        }
+
+        fun categoryListing(categoryListingInterface: HomeActivity.CategoryListingInterface) {
+            val retrofit = RetrofitClient.getClient()!!
+            val retrofitApi = retrofit.create(RetrofitApi::class.java)
+            val call: Call<ListingResponse> = retrofitApi.categoryListing()
+
+            Log.d(TAG, "onClick: " + call.request().url())
+
+            call.enqueue(object : Callback<ListingResponse?> {
+                override fun onResponse(
+                    call: Call<ListingResponse?>,
+                    response: Response<ListingResponse?>
+                ) {
+                    if (response.code() == 200) {
+                        val listingResponse = response.body()!!
+                        categoryListingInterface.onListingSuccess(listingResponse)
+                    }
+                    categoryListingInterface.onListingFailure()
+                }
+
+                override fun onFailure(call: Call<ListingResponse?>, t: Throwable) {
+                    Log.d(TAG, "onFailure: " + t.message)
+                    categoryListingInterface.onListingFailure()
 
                 }
             })

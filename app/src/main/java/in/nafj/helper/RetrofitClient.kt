@@ -1,9 +1,11 @@
 package `in`.nafj.helper
 
+import `in`.nafj.helper.Constants.Companion.domainUrl
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
 class RetrofitClient {
@@ -28,7 +30,7 @@ class RetrofitClient {
         }
 
         fun getClient(): Retrofit? {
-            retrofit = Retrofit.Builder().client(okhttpClient()).baseUrl(url)
+            retrofit = Retrofit.Builder().client(okhttpClient()).baseUrl(domainUrl)
                 .addConverterFactory(GsonConverterFactory.create(gson)).build()
             return retrofit
         }
@@ -37,6 +39,7 @@ class RetrofitClient {
             retrofit =
                 Retrofit.Builder().baseUrl(SMS_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create(gson))
+                    .addConverterFactory(ScalarsConverterFactory.create())
                     .build()
             return retrofit
         }

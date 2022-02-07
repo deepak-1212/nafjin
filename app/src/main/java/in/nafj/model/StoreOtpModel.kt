@@ -1,3 +1,12 @@
 package `in`.nafj.model
 
-data class StoreOtpModel(val number: String, val otp: String)
+import com.google.gson.annotations.SerializedName
+
+data class StoreOtpModel(
+    @SerializedName("LoginNumber")
+    val number: String,
+    @SerializedName("LoginOtp")
+    val otp: String,
+    @SerializedName("LoginToken")
+    val firebaseToken: String = ""
+)

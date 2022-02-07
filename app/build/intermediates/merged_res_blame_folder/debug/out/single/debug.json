@@ -28,6 +28,10 @@
         "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\activity_profile.xml"
     },
     {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\layout_view_category_single.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\view_category_single.xml"
+    },
+    {
         "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
@@ -66,6 +70,10 @@
     {
         "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_login.xml.flat",
         "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\layout_view_product_single.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\view_product_single.xml"
     },
     {
         "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\font_barlow_bold.ttf.flat",
@@ -122,6 +130,10 @@
     {
         "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_product_listing.xml.flat",
         "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\activity_product_listing.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\layout_view_sub_category_single.xml.flat",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\view_sub_category_single.xml"
     },
     {
         "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_view_product.xml.flat",

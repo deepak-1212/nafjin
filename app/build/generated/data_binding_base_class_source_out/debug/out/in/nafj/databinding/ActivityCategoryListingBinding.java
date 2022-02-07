@@ -8,14 +8,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.recyclerview.widget.RecyclerView;
 import in.nafj.R;
 import java.lang.Deprecated;
 import java.lang.Object;
 
 public abstract class ActivityCategoryListingBinding extends ViewDataBinding {
+  @NonNull
+  public final RecyclerView categoryListing;
+
   protected ActivityCategoryListingBinding(Object _bindingComponent, View _root,
-      int _localFieldCount) {
+      int _localFieldCount, RecyclerView categoryListing) {
     super(_bindingComponent, _root, _localFieldCount);
+    this.categoryListing = categoryListing;
   }
 
   @NonNull

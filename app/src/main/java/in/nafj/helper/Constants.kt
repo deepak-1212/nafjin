@@ -8,6 +8,7 @@ class Constants {
         const val domainUrl = "https://www.$domainName.in/android/"
 
         const val url: String = domainUrl + "services/user/"
+        const val sharedPrefFile = "NafjSharedPrefs"
 
-        }
+    }
 }

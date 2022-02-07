@@ -5,6 +5,8 @@ plugins {
     id 'kotlin-parcelize'
 }
 
+apply plugin: "com.google.gms.google-services"
+
 android {
     compileSdk 31
 
@@ -52,6 +54,7 @@ dependencies {
     //fetch api
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
 
     //automatic slider
     implementation 'androidx.viewpager2:viewpager2:1.0.0'

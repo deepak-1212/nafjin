@@ -3,22 +3,34 @@ package `in`.nafj.activity
 import `in`.nafj.R
 import `in`.nafj.databinding.ActivityCategoryListingBinding
 import `in`.nafj.databinding.ViewCategorySingleBinding
+import `in`.nafj.helper.ListingResponse
+import `in`.nafj.helper.RetrofitFunctions
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 
 data class Category(val id: Int, val name: String, val imageUrl: String)
 
+private const val TAG = "HomeActivity"
 class HomeActivity : AppCompatActivity() {
 
     interface CategoryInterface {
         fun onCategorySelected(position: Int)
     }
 
+    interface CategoryListingInterface{
+        fun onListingSuccess(body: ListingResponse)
+        fun onListingFailure()
+    }
+
+    private var firebaseToken = ""
     private lateinit var binding: ActivityCategoryListingBinding
     private val categoryList = ArrayList<Category>()
     private val categoryInterface = object : CategoryInterface {
@@ -28,13 +40,29 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
+    private val categoryListingInterface = object : CategoryListingInterface {
+        override fun onListingSuccess(body: ListingResponse) {
+            Log.i(TAG, "onListingSuccess: $body")
+        }
+
+        override fun onListingFailure() {
+
+        }
+
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_category_listing)
 
+        RetrofitFunctions.categoryListing(categoryListingInterface)
+
         binding.categoryListing.layoutManager =
             GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)
         binding.categoryListing.adapter = CategoryListingAdapter(categoryList, categoryInterface)
+
+        retrieveToken()
 
     }
 
@@ -88,6 +116,18 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun retrieveToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("TAG", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            firebaseToken = task.result
+        })
     }
 
 }
