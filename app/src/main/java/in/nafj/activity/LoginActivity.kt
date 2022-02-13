@@ -1,6 +1,7 @@
 package `in`.nafj.activity
 
 import `in`.nafj.R
+import `in`.nafj.database.DatabaseHelper
 import `in`.nafj.databinding.ActivityLoginBinding
 import `in`.nafj.helper.Constants
 import android.content.Context
@@ -40,6 +41,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         FirebaseApp.initializeApp(this)
+        DatabaseHelper(this).writableDatabase
         retrieveToken()
 
         sharedPreferences = application.getSharedPreferences(

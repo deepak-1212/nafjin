@@ -36,9 +36,14 @@ data class SingleProductResponse(
     @SerializedName("title")
     val title: String,
     @SerializedName("desc")
-    val desc: String
+    val desc: String,
+    @SerializedName("postId")
+    val postId: Int,
+    @SerializedName("productDetails")
+    val productDetails: SingleProductDetail
 )
 
+data class SingleProductDetail(val _sku: String, val _price: Int, val _stock: Int)
 
 class RetrofitModels {
 

@@ -16,5 +16,6 @@
     <dimen name="editTextHeightView">40dp</dimen>
 
     <dimen name="bottom_sheet_margin">16dp</dimen>
+    <dimen name="toolbar_elevation">20dp</dimen>
 
 </resources>

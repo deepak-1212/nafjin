@@ -9,12 +9,16 @@ import androidx.databinding.ViewDataBinding;
 import in.nafj.databinding.ActivityCategoryListingBindingImpl;
 import in.nafj.databinding.ActivityLoginBindingImpl;
 import in.nafj.databinding.ActivityLoginOtpBindingImpl;
+import in.nafj.databinding.ActivityNotificationListingBindingImpl;
+import in.nafj.databinding.ActivityOrderListingBindingImpl;
 import in.nafj.databinding.ActivityProductListingBindingImpl;
 import in.nafj.databinding.ActivityProfileBindingImpl;
 import in.nafj.databinding.ActivitySignUpBindingImpl;
 import in.nafj.databinding.ActivitySubCategoryListingBindingImpl;
 import in.nafj.databinding.ActivityViewCartBindingImpl;
 import in.nafj.databinding.ActivityViewProductBindingImpl;
+import in.nafj.databinding.FragmentRemoveItemOrderListBindingImpl;
+import in.nafj.databinding.ToolbarHomeBindingImpl;
 import in.nafj.databinding.ViewCategorySingleBindingImpl;
 import in.nafj.databinding.ViewProductSingleBindingImpl;
 import in.nafj.databinding.ViewSubCategorySingleBindingImpl;
@@ -35,36 +39,48 @@ public class DataBinderMapperImpl extends DataBinderMapper {
 
   private static final int LAYOUT_ACTIVITYLOGINOTP = 3;
 
-  private static final int LAYOUT_ACTIVITYPRODUCTLISTING = 4;
+  private static final int LAYOUT_ACTIVITYNOTIFICATIONLISTING = 4;
 
-  private static final int LAYOUT_ACTIVITYPROFILE = 5;
+  private static final int LAYOUT_ACTIVITYORDERLISTING = 5;
 
-  private static final int LAYOUT_ACTIVITYSIGNUP = 6;
+  private static final int LAYOUT_ACTIVITYPRODUCTLISTING = 6;
 
-  private static final int LAYOUT_ACTIVITYSUBCATEGORYLISTING = 7;
+  private static final int LAYOUT_ACTIVITYPROFILE = 7;
 
-  private static final int LAYOUT_ACTIVITYVIEWCART = 8;
+  private static final int LAYOUT_ACTIVITYSIGNUP = 8;
 
-  private static final int LAYOUT_ACTIVITYVIEWPRODUCT = 9;
+  private static final int LAYOUT_ACTIVITYSUBCATEGORYLISTING = 9;
 
-  private static final int LAYOUT_VIEWCATEGORYSINGLE = 10;
+  private static final int LAYOUT_ACTIVITYVIEWCART = 10;
 
-  private static final int LAYOUT_VIEWPRODUCTSINGLE = 11;
+  private static final int LAYOUT_ACTIVITYVIEWPRODUCT = 11;
 
-  private static final int LAYOUT_VIEWSUBCATEGORYSINGLE = 12;
+  private static final int LAYOUT_FRAGMENTREMOVEITEMORDERLIST = 12;
 
-  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(12);
+  private static final int LAYOUT_TOOLBARHOME = 13;
+
+  private static final int LAYOUT_VIEWCATEGORYSINGLE = 14;
+
+  private static final int LAYOUT_VIEWPRODUCTSINGLE = 15;
+
+  private static final int LAYOUT_VIEWSUBCATEGORYSINGLE = 16;
+
+  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(16);
 
   static {
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.activity_category_listing, LAYOUT_ACTIVITYCATEGORYLISTING);
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.activity_login, LAYOUT_ACTIVITYLOGIN);
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.activity_login_otp, LAYOUT_ACTIVITYLOGINOTP);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.activity_notification_listing, LAYOUT_ACTIVITYNOTIFICATIONLISTING);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.activity_order_listing, LAYOUT_ACTIVITYORDERLISTING);
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.activity_product_listing, LAYOUT_ACTIVITYPRODUCTLISTING);
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.activity_profile, LAYOUT_ACTIVITYPROFILE);
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.activity_sign_up, LAYOUT_ACTIVITYSIGNUP);
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.activity_sub_category_listing, LAYOUT_ACTIVITYSUBCATEGORYLISTING);
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.activity_view_cart, LAYOUT_ACTIVITYVIEWCART);
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.activity_view_product, LAYOUT_ACTIVITYVIEWPRODUCT);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.fragment_remove_item_order_list, LAYOUT_FRAGMENTREMOVEITEMORDERLIST);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.toolbar_home, LAYOUT_TOOLBARHOME);
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.view_category_single, LAYOUT_VIEWCATEGORYSINGLE);
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.view_product_single, LAYOUT_VIEWPRODUCTSINGLE);
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.view_sub_category_single, LAYOUT_VIEWSUBCATEGORYSINGLE);
@@ -96,6 +112,18 @@ public class DataBinderMapperImpl extends DataBinderMapper {
             return new ActivityLoginOtpBindingImpl(component, view);
           }
           throw new IllegalArgumentException("The tag for activity_login_otp is invalid. Received: " + tag);
+        }
+        case  LAYOUT_ACTIVITYNOTIFICATIONLISTING: {
+          if ("layout/activity_notification_listing_0".equals(tag)) {
+            return new ActivityNotificationListingBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for activity_notification_listing is invalid. Received: " + tag);
+        }
+        case  LAYOUT_ACTIVITYORDERLISTING: {
+          if ("layout/activity_order_listing_0".equals(tag)) {
+            return new ActivityOrderListingBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for activity_order_listing is invalid. Received: " + tag);
         }
         case  LAYOUT_ACTIVITYPRODUCTLISTING: {
           if ("layout/activity_product_listing_0".equals(tag)) {
@@ -132,6 +160,18 @@ public class DataBinderMapperImpl extends DataBinderMapper {
             return new ActivityViewProductBindingImpl(component, view);
           }
           throw new IllegalArgumentException("The tag for activity_view_product is invalid. Received: " + tag);
+        }
+        case  LAYOUT_FRAGMENTREMOVEITEMORDERLIST: {
+          if ("layout/fragment_remove_item_order_list_0".equals(tag)) {
+            return new FragmentRemoveItemOrderListBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for fragment_remove_item_order_list is invalid. Received: " + tag);
+        }
+        case  LAYOUT_TOOLBARHOME: {
+          if ("layout/toolbar_home_0".equals(tag)) {
+            return new ToolbarHomeBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for toolbar_home is invalid. Received: " + tag);
         }
         case  LAYOUT_VIEWCATEGORYSINGLE: {
           if ("layout/view_category_single_0".equals(tag)) {
@@ -204,18 +244,22 @@ public class DataBinderMapperImpl extends DataBinderMapper {
   }
 
   private static class InnerLayoutIdLookup {
-    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(12);
+    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(16);
 
     static {
       sKeys.put("layout/activity_category_listing_0", in.nafj.R.layout.activity_category_listing);
       sKeys.put("layout/activity_login_0", in.nafj.R.layout.activity_login);
       sKeys.put("layout/activity_login_otp_0", in.nafj.R.layout.activity_login_otp);
+      sKeys.put("layout/activity_notification_listing_0", in.nafj.R.layout.activity_notification_listing);
+      sKeys.put("layout/activity_order_listing_0", in.nafj.R.layout.activity_order_listing);
       sKeys.put("layout/activity_product_listing_0", in.nafj.R.layout.activity_product_listing);
       sKeys.put("layout/activity_profile_0", in.nafj.R.layout.activity_profile);
       sKeys.put("layout/activity_sign_up_0", in.nafj.R.layout.activity_sign_up);
       sKeys.put("layout/activity_sub_category_listing_0", in.nafj.R.layout.activity_sub_category_listing);
       sKeys.put("layout/activity_view_cart_0", in.nafj.R.layout.activity_view_cart);
       sKeys.put("layout/activity_view_product_0", in.nafj.R.layout.activity_view_product);
+      sKeys.put("layout/fragment_remove_item_order_list_0", in.nafj.R.layout.fragment_remove_item_order_list);
+      sKeys.put("layout/toolbar_home_0", in.nafj.R.layout.toolbar_home);
       sKeys.put("layout/view_category_single_0", in.nafj.R.layout.view_category_single);
       sKeys.put("layout/view_product_single_0", in.nafj.R.layout.view_product_single);
       sKeys.put("layout/view_sub_category_single_0", in.nafj.R.layout.view_sub_category_single);

@@ -12,9 +12,13 @@ public class ActivityProductListingBindingImpl extends ActivityProductListingBin
     @Nullable
     private static final android.util.SparseIntArray sViewsWithIds;
     static {
-        sIncludes = null;
+        sIncludes = new androidx.databinding.ViewDataBinding.IncludedLayouts(3);
+        sIncludes.setIncludes(0, 
+            new String[] {"toolbar_home"},
+            new int[] {1},
+            new int[] {in.nafj.R.layout.toolbar_home});
         sViewsWithIds = new android.util.SparseIntArray();
-        sViewsWithIds.put(R.id.productListing, 1);
+        sViewsWithIds.put(R.id.productListing, 2);
     }
     // views
     @NonNull
@@ -25,14 +29,16 @@ public class ActivityProductListingBindingImpl extends ActivityProductListingBin
     // Inverse Binding Event Handlers
 
     public ActivityProductListingBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 2, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 3, sIncludes, sViewsWithIds));
     }
     private ActivityProductListingBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
-        super(bindingComponent, root, 0
-            , (androidx.recyclerview.widget.RecyclerView) bindings[1]
+        super(bindingComponent, root, 1
+            , (androidx.recyclerview.widget.RecyclerView) bindings[2]
+            , (in.nafj.databinding.ToolbarHomeBinding) bindings[1]
             );
         this.mboundView0 = (androidx.constraintlayout.widget.ConstraintLayout) bindings[0];
         this.mboundView0.setTag(null);
+        setContainedBinding(this.productListingToolbar);
         setRootTag(root);
         // listeners
         invalidateAll();
@@ -41,8 +47,9 @@ public class ActivityProductListingBindingImpl extends ActivityProductListingBin
     @Override
     public void invalidateAll() {
         synchronized(this) {
-                mDirtyFlags = 0x1L;
+                mDirtyFlags = 0x2L;
         }
+        productListingToolbar.invalidateAll();
         requestRebind();
     }
 
@@ -52,6 +59,9 @@ public class ActivityProductListingBindingImpl extends ActivityProductListingBin
             if (mDirtyFlags != 0) {
                 return true;
             }
+        }
+        if (productListingToolbar.hasPendingBindings()) {
+            return true;
         }
         return false;
     }
@@ -63,8 +73,25 @@ public class ActivityProductListingBindingImpl extends ActivityProductListingBin
     }
 
     @Override
+    public void setLifecycleOwner(@Nullable androidx.lifecycle.LifecycleOwner lifecycleOwner) {
+        super.setLifecycleOwner(lifecycleOwner);
+        productListingToolbar.setLifecycleOwner(lifecycleOwner);
+    }
+
+    @Override
     protected boolean onFieldChange(int localFieldId, Object object, int fieldId) {
         switch (localFieldId) {
+            case 0 :
+                return onChangeProductListingToolbar((in.nafj.databinding.ToolbarHomeBinding) object, fieldId);
+        }
+        return false;
+    }
+    private boolean onChangeProductListingToolbar(in.nafj.databinding.ToolbarHomeBinding ProductListingToolbar, int fieldId) {
+        if (fieldId == BR._all) {
+            synchronized(this) {
+                    mDirtyFlags |= 0x1L;
+            }
+            return true;
         }
         return false;
     }
@@ -77,13 +104,15 @@ public class ActivityProductListingBindingImpl extends ActivityProductListingBin
             mDirtyFlags = 0;
         }
         // batch finished
+        executeBindingsOn(productListingToolbar);
     }
     // Listener Stub Implementations
     // callback impls
     // dirty flag
     private  long mDirtyFlags = 0xffffffffffffffffL;
     /* flag mapping
-        flag 0 (0x1L): null
+        flag 0 (0x1L): productListingToolbar
+        flag 1 (0x2L): null
     flag mapping end*/
     //end
 }

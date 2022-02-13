@@ -80,6 +80,7 @@ class LoginOtpActivity : AppCompatActivity(), View.OnClickListener {
 
             val editor = sharedPreferences.edit()
             editor.putBoolean("loginStatus", true)
+            editor.putString("loginNumber", passedNumber)
             editor.apply()
 
             showProgressBar(false)

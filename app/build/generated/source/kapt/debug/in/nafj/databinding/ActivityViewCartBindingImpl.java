@@ -12,7 +12,11 @@ public class ActivityViewCartBindingImpl extends ActivityViewCartBinding  {
     @Nullable
     private static final android.util.SparseIntArray sViewsWithIds;
     static {
-        sIncludes = null;
+        sIncludes = new androidx.databinding.ViewDataBinding.IncludedLayouts(2);
+        sIncludes.setIncludes(0, 
+            new String[] {"toolbar_home"},
+            new int[] {1},
+            new int[] {in.nafj.R.layout.toolbar_home});
         sViewsWithIds = null;
     }
     // views
@@ -24,13 +28,15 @@ public class ActivityViewCartBindingImpl extends ActivityViewCartBinding  {
     // Inverse Binding Event Handlers
 
     public ActivityViewCartBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 1, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 2, sIncludes, sViewsWithIds));
     }
     private ActivityViewCartBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
-        super(bindingComponent, root, 0
+        super(bindingComponent, root, 1
+            , (in.nafj.databinding.ToolbarHomeBinding) bindings[1]
             );
         this.mboundView0 = (androidx.constraintlayout.widget.ConstraintLayout) bindings[0];
         this.mboundView0.setTag(null);
+        setContainedBinding(this.viewCartToolbar);
         setRootTag(root);
         // listeners
         invalidateAll();
@@ -39,8 +45,9 @@ public class ActivityViewCartBindingImpl extends ActivityViewCartBinding  {
     @Override
     public void invalidateAll() {
         synchronized(this) {
-                mDirtyFlags = 0x1L;
+                mDirtyFlags = 0x2L;
         }
+        viewCartToolbar.invalidateAll();
         requestRebind();
     }
 
@@ -50,6 +57,9 @@ public class ActivityViewCartBindingImpl extends ActivityViewCartBinding  {
             if (mDirtyFlags != 0) {
                 return true;
             }
+        }
+        if (viewCartToolbar.hasPendingBindings()) {
+            return true;
         }
         return false;
     }
@@ -61,8 +71,25 @@ public class ActivityViewCartBindingImpl extends ActivityViewCartBinding  {
     }
 
     @Override
+    public void setLifecycleOwner(@Nullable androidx.lifecycle.LifecycleOwner lifecycleOwner) {
+        super.setLifecycleOwner(lifecycleOwner);
+        viewCartToolbar.setLifecycleOwner(lifecycleOwner);
+    }
+
+    @Override
     protected boolean onFieldChange(int localFieldId, Object object, int fieldId) {
         switch (localFieldId) {
+            case 0 :
+                return onChangeViewCartToolbar((in.nafj.databinding.ToolbarHomeBinding) object, fieldId);
+        }
+        return false;
+    }
+    private boolean onChangeViewCartToolbar(in.nafj.databinding.ToolbarHomeBinding ViewCartToolbar, int fieldId) {
+        if (fieldId == BR._all) {
+            synchronized(this) {
+                    mDirtyFlags |= 0x1L;
+            }
+            return true;
         }
         return false;
     }
@@ -75,13 +102,15 @@ public class ActivityViewCartBindingImpl extends ActivityViewCartBinding  {
             mDirtyFlags = 0;
         }
         // batch finished
+        executeBindingsOn(viewCartToolbar);
     }
     // Listener Stub Implementations
     // callback impls
     // dirty flag
     private  long mDirtyFlags = 0xffffffffffffffffL;
     /* flag mapping
-        flag 0 (0x1L): null
+        flag 0 (0x1L): viewCartToolbar
+        flag 1 (0x2L): null
     flag mapping end*/
     //end
 }

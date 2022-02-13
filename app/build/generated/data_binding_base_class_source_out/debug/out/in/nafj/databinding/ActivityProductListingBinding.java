@@ -17,10 +17,14 @@ public abstract class ActivityProductListingBinding extends ViewDataBinding {
   @NonNull
   public final RecyclerView productListing;
 
+  @NonNull
+  public final ToolbarHomeBinding productListingToolbar;
+
   protected ActivityProductListingBinding(Object _bindingComponent, View _root,
-      int _localFieldCount, RecyclerView productListing) {
+      int _localFieldCount, RecyclerView productListing, ToolbarHomeBinding productListingToolbar) {
     super(_bindingComponent, _root, _localFieldCount);
     this.productListing = productListing;
+    this.productListingToolbar = productListingToolbar;
   }
 
   @NonNull

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="in.nafj" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="in.nafj">
 
     <application
         android:allowBackup="true"
@@ -11,29 +12,55 @@
         android:theme="@style/Theme.Nafj"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.NotificationListingActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.OrderListingActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".activity.ProductListingActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".activity.LoginOtpActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".activity.ViewProductActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ViewCartActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".activity.SubCategoryListingActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.LoginActivity"
-            android:exported="true" >
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,8 +68,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.LoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
+        </activity>
+        <activity
             android:name=".activity.SignUpActivity"
             android:exported="true" />
+
         <service
             android:name=".service.MyFirebaseMessagingService"
             android:exported="false">

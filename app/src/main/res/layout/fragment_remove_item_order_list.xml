@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".sheets.RemoveItemOrderList">
+
+        <ImageView
+            android:id="@+id/removeItemImage"
+            android:layout_width="130dp"
+            android:layout_height="150dp"
+            android:layout_margin="@dimen/textLightHeaderPadding"
+            android:padding="@dimen/textLightHeaderPadding"
+            android:contentDescription="@string/viewproductimage"
+            app:layout_constraintEnd_toStartOf="@+id/imageBarrier"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/imageBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="removeItemImage" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/removeItemHeader"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/barlow_medium"
+            android:gravity="bottom"
+            android:padding="@dimen/textLightHeaderPadding"
+            android:text="@string/remove_item"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/removeItemSubHeader"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imageBarrier"
+            app:layout_constraintTop_toTopOf="@+id/removeItemImage" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/removeItemSubHeader"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/barlow_medium"
+            android:padding="@dimen/textLightHeaderPadding"
+            android:text="@string/are_you_sure_to_remove_this_item"
+            app:layout_constraintBottom_toBottomOf="@+id/removeItemImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/removeItemHeader"
+            app:layout_constraintTop_toBottomOf="@+id/removeItemHeader" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cancelRemoveItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/textLightHeaderPadding"
+            android:padding="@dimen/textLightHeaderPadding"
+            android:text="@string/cancel"
+            app:layout_constraintEnd_toStartOf="@+id/okRemoveItem"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/removeItemImage"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/okRemoveItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/textLightHeaderPadding"
+            android:padding="@dimen/textLightHeaderPadding"
+            android:text="@string/remove"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cancelRemoveItem"
+            app:layout_constraintTop_toBottomOf="@+id/removeItemImage"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

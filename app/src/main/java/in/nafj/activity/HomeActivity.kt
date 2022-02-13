@@ -2,9 +2,16 @@ package `in`.nafj.activity
 
 import `in`.nafj.R
 import `in`.nafj.databinding.ActivityCategoryListingBinding
+import `in`.nafj.databinding.ToolbarHomeBinding
 import `in`.nafj.databinding.ViewCategorySingleBinding
+import `in`.nafj.helper.Constants
 import `in`.nafj.helper.ListingResponse
 import `in`.nafj.helper.RetrofitFunctions
+import `in`.nafj.helper.SingleCategoryResponse
+import `in`.nafj.sheets.RemoveItemOrderList
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,14 +22,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
-
-data class Category(val id: Int, val name: String, val imageUrl: String)
+import com.google.gson.Gson
 
 private const val TAG = "HomeActivity"
 class HomeActivity : AppCompatActivity() {
 
     interface CategoryInterface {
-        fun onCategorySelected(position: Int)
+        fun onCategorySelected(
+            position: Int,
+            singleCategoryResponse: SingleCategoryResponse,
+            categoryName: String
+        )
     }
 
     interface CategoryListingInterface{
@@ -32,10 +42,24 @@ class HomeActivity : AppCompatActivity() {
 
     private var firebaseToken = ""
     private lateinit var binding: ActivityCategoryListingBinding
-    private val categoryList = ArrayList<Category>()
-    private val categoryInterface = object : CategoryInterface {
-        override fun onCategorySelected(position: Int) {
+    private lateinit var toolbarBinding: ToolbarHomeBinding
+    private val categoryList = ArrayList<SingleCategoryResponse>()
+    private lateinit var categoryListingAdapter: CategoryListingAdapter
+    private lateinit var sharedPreferences: SharedPreferences
 
+    private val categoryInterface = object : CategoryInterface {
+        override fun onCategorySelected(
+            position: Int,
+            singleCategoryResponse: SingleCategoryResponse,
+            categoryName: String
+        ) {
+
+            Log.i(TAG, "onCategorySelected: single: $singleCategoryResponse")
+            val json = Gson().toJson(singleCategoryResponse)
+            val intent = Intent(this@HomeActivity, ProductListingActivity::class.java)
+            intent.putExtra("singleCategoryResponse", json)
+            intent.putExtra("categoryName", categoryName)
+            startActivity(intent)
         }
 
     }
@@ -43,26 +67,67 @@ class HomeActivity : AppCompatActivity() {
     private val categoryListingInterface = object : CategoryListingInterface {
         override fun onListingSuccess(body: ListingResponse) {
             Log.i(TAG, "onListingSuccess: $body")
+
+            for (categoryDetails in body.categoryDetails) {
+                categoryList.add(categoryDetails)
+                categoryListingAdapter.notifyItemInserted(categoryList.size)
+            }
+
         }
 
         override fun onListingFailure() {
 
         }
 
+    }
+
+    private val removeItemInterface = object : RemoveItemOrderList.RemoveItemInterface {
+        override fun onRemoveSelected() {
+            Log.i(TAG, "onRemoveSelected: remove item selected")
+
+        }
+
+        override fun onRemoveCancelled() {
+            Log.i(TAG, "onRemoveCancelled: selected")
+        }
 
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_category_listing)
+        toolbarBinding = binding.homeToolbar
 
         RetrofitFunctions.categoryListing(categoryListingInterface)
 
         binding.categoryListing.layoutManager =
             GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)
-        binding.categoryListing.adapter = CategoryListingAdapter(categoryList, categoryInterface)
+        categoryListingAdapter = CategoryListingAdapter(categoryList, categoryInterface)
+        binding.categoryListing.adapter = categoryListingAdapter
 
         retrieveToken()
+
+        toolbarBinding.notifications.setOnClickListener {
+            val viewProductActivity = Intent(this, NotificationListingActivity::class.java)
+            startActivity(viewProductActivity)
+        }
+        toolbarBinding.shoppingCart.setOnClickListener {
+            val viewProductActivity = Intent(this, ViewCartActivity::class.java)
+            startActivity(viewProductActivity)
+            /*val fragment = RemoveItemOrderList(removeItemInterface)
+            fragment.show(supportFragmentManager, TAG)*/
+        }
+
+        sharedPreferences = application.getSharedPreferences(
+            Constants.sharedPrefFile,
+            Context.MODE_PRIVATE
+        )
+
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("loginStatus", true)
+        editor.putString("loginNumber", "8898310860")
+        editor.apply()
+
 
     }
 
@@ -75,7 +140,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     inner class CategoryListingAdapter(
-        private var categoryList: ArrayList<Category>,
+        private var categoryList: ArrayList<SingleCategoryResponse>,
         private val categoryInterface: CategoryInterface
     ) : RecyclerView.Adapter<CategoryListingAdapter.ViewHolder>() {
 
@@ -108,11 +173,13 @@ class HomeActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: CategoryListingAdapter.ViewHolder, position: Int) {
             with(categoryList[position]) {
 
-//                holder.binding.categoryImage
-                holder.binding.categoryName.text = name
+                holder.binding.categoryName.text = categoryName
 
                 holder.binding.root.setOnClickListener {
-                    categoryInterface.onCategorySelected(holder.adapterPosition)
+
+                    
+
+                    categoryInterface.onCategorySelected(holder.adapterPosition, this, categoryName)
                 }
             }
         }

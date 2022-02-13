@@ -28,34 +28,55 @@
         android:theme="@style/Theme.Nafj"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name="in.nafj.activity.NotificationListingActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.nafj.activity.OrderListingActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="in.nafj.activity.ProductListingActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="in.nafj.activity.LoginOtpActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name="in.nafj.activity.ViewProductActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="in.nafj.activity.ProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="in.nafj.activity.ViewCartActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name="in.nafj.activity.SubCategoryListingActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="in.nafj.activity.HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name="in.nafj.activity.LoginActivity"
-            android:exported="true" >
+            android:exported="true"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="in.nafj.activity.LoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="in.nafj.activity.SignUpActivity"

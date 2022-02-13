@@ -2,7 +2,11 @@ package `in`.nafj.activity
 
 import `in`.nafj.R
 import `in`.nafj.databinding.ActivityProductListingBinding
+import `in`.nafj.databinding.ToolbarHomeBinding
 import `in`.nafj.databinding.ViewProductSingleBinding
+import `in`.nafj.helper.SingleCategoryResponse
+import `in`.nafj.helper.SingleProductResponse
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,19 +14,33 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 
-data class Product(val id: Int, val name: String, val imageUrl: String)
+private const val TAG = "ProductListing"
 
 class ProductListingActivity : AppCompatActivity() {
 
     interface ProductInterface {
-        fun onProductSelected(position: Int)
+        fun onProductSelected(position: Int, singleProductResponse: SingleProductResponse)
     }
-    private lateinit var binding: ActivityProductListingBinding
-    private val productList = ArrayList<Product>()
-    private val productInterface = object : ProductInterface {
-        override fun onProductSelected(position: Int) {
 
+    private lateinit var binding: ActivityProductListingBinding
+    private lateinit var toolbarBinding: ToolbarHomeBinding
+    private lateinit var productListAdapter: ProductListAdapter
+    private val productList = ArrayList<SingleProductResponse>()
+
+    private lateinit var categoryName: String
+
+    private val productInterface = object : ProductInterface {
+        override fun onProductSelected(
+            position: Int,
+            singleProductResponse: SingleProductResponse
+        ) {
+            val json = Gson().toJson(singleProductResponse)
+            val intent = Intent(this@ProductListingActivity, ViewProductActivity::class.java)
+            intent.putExtra("singleProductResponse", json)
+            intent.putExtra("categoryName", categoryName)
+            startActivity(intent)
         }
 
 
@@ -33,25 +51,41 @@ class ProductListingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_product_listing)
+        toolbarBinding = binding.productListingToolbar
 
-        binding.productListing.layoutManager =
-            GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)
-        binding.productListing.adapter =
-            ProductListAdapter(productList, productInterface)
+        val json = intent.getStringExtra("singleCategoryResponse")
+        val singleCategoryResponse = Gson().fromJson(json, SingleCategoryResponse::class.java)
+        categoryName = intent.getStringExtra("categoryName")!!
 
-    }
+        toolbarBinding.headerTextView.text = categoryName
 
-    override fun onStop() {
-        super.onStop()
-    }
+        setSupportActionBar(toolbarBinding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
-    override fun onBackPressed() {
-        super.onBackPressed()
+        toolbarBinding.toolbar.setNavigationIcon(R.drawable.back_arrow)
+        toolbarBinding.toolbar.setNavigationOnClickListener { onBackPressed() }
+
+
+        productList.addAll(singleCategoryResponse.categoryProducts)
+        binding.productListing.layoutManager = GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)
+        productListAdapter = ProductListAdapter(productList, productInterface)
+        binding.productListing.adapter = productListAdapter
+
+        toolbarBinding.notifications.setOnClickListener {
+            val viewProductActivity = Intent(this, NotificationListingActivity::class.java)
+            startActivity(viewProductActivity)
+        }
+        toolbarBinding.shoppingCart.setOnClickListener {
+            val viewProductActivity = Intent(this, ViewCartActivity::class.java)
+            startActivity(viewProductActivity)
+        }
+
     }
 
 
     inner class ProductListAdapter(
-        private var subCategoryList: ArrayList<Product>,
+        private var subCategoryList: ArrayList<SingleProductResponse>,
         private val productInterface: ProductInterface
     ) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
@@ -84,14 +118,13 @@ class ProductListingActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: ProductListAdapter.ViewHolder, position: Int) {
             with(subCategoryList[position]) {
 
-//                holder.binding.categoryImage
-                holder.binding.productName.text = name
+                holder.binding.productName.text = title
 
                 holder.binding.root.setOnClickListener {
-                    productInterface.onProductSelected(holder.adapterPosition)
+                    productInterface.onProductSelected(holder.adapterPosition, this)
                 }
             }
         }
     }
-    
+
 }

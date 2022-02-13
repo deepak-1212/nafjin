@@ -13,8 +13,13 @@ import java.lang.Deprecated;
 import java.lang.Object;
 
 public abstract class ActivityViewCartBinding extends ViewDataBinding {
-  protected ActivityViewCartBinding(Object _bindingComponent, View _root, int _localFieldCount) {
+  @NonNull
+  public final ToolbarHomeBinding viewCartToolbar;
+
+  protected ActivityViewCartBinding(Object _bindingComponent, View _root, int _localFieldCount,
+      ToolbarHomeBinding viewCartToolbar) {
     super(_bindingComponent, _root, _localFieldCount);
+    this.viewCartToolbar = viewCartToolbar;
   }
 
   @NonNull

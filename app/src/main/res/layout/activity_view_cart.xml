@@ -7,5 +7,12 @@
         android:layout_height="match_parent"
         tools:context=".activity.ViewCartActivity">
 
+        <include
+            android:id="@+id/viewCartToolbar"
+            layout="@layout/toolbar_home"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

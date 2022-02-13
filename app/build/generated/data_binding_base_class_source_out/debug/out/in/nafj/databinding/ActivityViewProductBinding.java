@@ -4,17 +4,106 @@ package in.nafj.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.constraintlayout.widget.Barrier;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import com.google.android.material.imageview.ShapeableImageView;
 import in.nafj.R;
 import java.lang.Deprecated;
 import java.lang.Object;
 
 public abstract class ActivityViewProductBinding extends ViewDataBinding {
-  protected ActivityViewProductBinding(Object _bindingComponent, View _root, int _localFieldCount) {
+  @NonNull
+  public final ShapeableImageView addQuantity;
+
+  @NonNull
+  public final AppCompatButton addToCart;
+
+  @NonNull
+  public final Barrier addToCartBarrier;
+
+  @NonNull
+  public final ConstraintLayout addToCartSection;
+
+  @NonNull
+  public final ScrollView centerView;
+
+  @NonNull
+  public final Barrier headerBarrier;
+
+  @NonNull
+  public final AppCompatTextView quantityText;
+
+  @NonNull
+  public final ShapeableImageView subtractQuantity;
+
+  @NonNull
+  public final AppCompatTextView totalAmountText;
+
+  @NonNull
+  public final AppCompatTextView totalQuantityText;
+
+  @NonNull
+  public final AppCompatTextView totalQuantityValue;
+
+  @NonNull
+  public final TextView viewProductCategory;
+
+  @NonNull
+  public final TextView viewProductDescription;
+
+  @NonNull
+  public final LinearLayout viewProductDetailsSection;
+
+  @NonNull
+  public final ImageView viewProductImage;
+
+  @NonNull
+  public final TextView viewProductName;
+
+  @NonNull
+  public final TextView viewProductPrice;
+
+  @NonNull
+  public final ToolbarHomeBinding viewProductToolbar;
+
+  protected ActivityViewProductBinding(Object _bindingComponent, View _root, int _localFieldCount,
+      ShapeableImageView addQuantity, AppCompatButton addToCart, Barrier addToCartBarrier,
+      ConstraintLayout addToCartSection, ScrollView centerView, Barrier headerBarrier,
+      AppCompatTextView quantityText, ShapeableImageView subtractQuantity,
+      AppCompatTextView totalAmountText, AppCompatTextView totalQuantityText,
+      AppCompatTextView totalQuantityValue, TextView viewProductCategory,
+      TextView viewProductDescription, LinearLayout viewProductDetailsSection,
+      ImageView viewProductImage, TextView viewProductName, TextView viewProductPrice,
+      ToolbarHomeBinding viewProductToolbar) {
     super(_bindingComponent, _root, _localFieldCount);
+    this.addQuantity = addQuantity;
+    this.addToCart = addToCart;
+    this.addToCartBarrier = addToCartBarrier;
+    this.addToCartSection = addToCartSection;
+    this.centerView = centerView;
+    this.headerBarrier = headerBarrier;
+    this.quantityText = quantityText;
+    this.subtractQuantity = subtractQuantity;
+    this.totalAmountText = totalAmountText;
+    this.totalQuantityText = totalQuantityText;
+    this.totalQuantityValue = totalQuantityValue;
+    this.viewProductCategory = viewProductCategory;
+    this.viewProductDescription = viewProductDescription;
+    this.viewProductDetailsSection = viewProductDetailsSection;
+    this.viewProductImage = viewProductImage;
+    this.viewProductName = viewProductName;
+    this.viewProductPrice = viewProductPrice;
+    this.viewProductToolbar = viewProductToolbar;
   }
 
   @NonNull
