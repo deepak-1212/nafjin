@@ -1,5 +1,7 @@
 package `in`.nafj.sheets
 
+import `in`.nafj.activity.ViewCartActivity
+import `in`.nafj.activity.ViewCartDataModel
 import `in`.nafj.databinding.FragmentRemoveItemOrderListBinding
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,12 +10,11 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 private const val TAG = "RemoveItemOrderList"
-class RemoveItemOrderList(private val removeItemInterface: RemoveItemInterface) : BottomSheetDialogFragment() {
-
-    interface RemoveItemInterface {
-        fun onRemoveSelected()
-        fun onRemoveCancelled()
-    }
+class RemoveItemOrderList(
+    private val removeItemInterface: ViewCartActivity.RemoveItemInterface,
+    private val position: Int,
+    private val viewCartDataModel: ViewCartDataModel
+) : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentRemoveItemOrderListBinding
 
@@ -37,7 +38,7 @@ class RemoveItemOrderList(private val removeItemInterface: RemoveItemInterface) 
 
         binding.okRemoveItem.setOnClickListener {
             dismiss()
-            removeItemInterface.onRemoveSelected()
+            removeItemInterface.onRemoveSelected(position, viewCartDataModel)
         }
 
         return binding.root

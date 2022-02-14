@@ -12,12 +12,18 @@ public class ActivityViewCartBindingImpl extends ActivityViewCartBinding  {
     @Nullable
     private static final android.util.SparseIntArray sViewsWithIds;
     static {
-        sIncludes = new androidx.databinding.ViewDataBinding.IncludedLayouts(2);
+        sIncludes = new androidx.databinding.ViewDataBinding.IncludedLayouts(8);
         sIncludes.setIncludes(0, 
             new String[] {"toolbar_home"},
             new int[] {1},
             new int[] {in.nafj.R.layout.toolbar_home});
-        sViewsWithIds = null;
+        sViewsWithIds = new android.util.SparseIntArray();
+        sViewsWithIds.put(R.id.noOrders, 2);
+        sViewsWithIds.put(R.id.viewCartRecycler, 3);
+        sViewsWithIds.put(R.id.placeOrderBottom, 4);
+        sViewsWithIds.put(R.id.totalAmountText, 5);
+        sViewsWithIds.put(R.id.totalAmount, 6);
+        sViewsWithIds.put(R.id.placeOrderButton, 7);
     }
     // views
     @NonNull
@@ -28,10 +34,16 @@ public class ActivityViewCartBindingImpl extends ActivityViewCartBinding  {
     // Inverse Binding Event Handlers
 
     public ActivityViewCartBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 2, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 8, sIncludes, sViewsWithIds));
     }
     private ActivityViewCartBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 1
+            , (androidx.appcompat.widget.AppCompatTextView) bindings[2]
+            , (androidx.constraintlayout.widget.ConstraintLayout) bindings[4]
+            , (androidx.appcompat.widget.AppCompatButton) bindings[7]
+            , (androidx.appcompat.widget.AppCompatTextView) bindings[6]
+            , (androidx.appcompat.widget.AppCompatTextView) bindings[5]
+            , (androidx.recyclerview.widget.RecyclerView) bindings[3]
             , (in.nafj.databinding.ToolbarHomeBinding) bindings[1]
             );
         this.mboundView0 = (androidx.constraintlayout.widget.ConstraintLayout) bindings[0];

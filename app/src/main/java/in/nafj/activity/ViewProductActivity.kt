@@ -73,7 +73,7 @@ class ViewProductActivity : AppCompatActivity() {
             if (!productPresentInCart) {
                 db = DatabaseHelper(this)
                 val userNumber = getSharedPreferences(Constants.sharedPrefFile, Context.MODE_PRIVATE).getString("loginNumber", "")
-                val recordVal = db.insertRowInCart(singleProductResponse, userNumber, totalQuantityCount)
+                val recordVal = db.insertRowInCart(singleProductResponse, userNumber, totalQuantityCount, categoryName)
 
                 if (recordVal > 0) {
                     Toast.makeText(this, "Item added to cart!", Toast.LENGTH_SHORT).show()

@@ -12,12 +12,13 @@ public class ActivityNotificationListingBindingImpl extends ActivityNotification
     @Nullable
     private static final android.util.SparseIntArray sViewsWithIds;
     static {
-        sIncludes = new androidx.databinding.ViewDataBinding.IncludedLayouts(2);
+        sIncludes = new androidx.databinding.ViewDataBinding.IncludedLayouts(3);
         sIncludes.setIncludes(0, 
             new String[] {"toolbar_home"},
             new int[] {1},
             new int[] {in.nafj.R.layout.toolbar_home});
-        sViewsWithIds = null;
+        sViewsWithIds = new android.util.SparseIntArray();
+        sViewsWithIds.put(R.id.notificationList, 2);
     }
     // views
     @NonNull
@@ -28,10 +29,11 @@ public class ActivityNotificationListingBindingImpl extends ActivityNotification
     // Inverse Binding Event Handlers
 
     public ActivityNotificationListingBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 2, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 3, sIncludes, sViewsWithIds));
     }
     private ActivityNotificationListingBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 1
+            , (androidx.recyclerview.widget.RecyclerView) bindings[2]
             , (in.nafj.databinding.ToolbarHomeBinding) bindings[1]
             );
         this.mboundView0 = (androidx.constraintlayout.widget.ConstraintLayout) bindings[0];

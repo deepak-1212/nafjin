@@ -19,7 +19,9 @@ import in.nafj.databinding.ActivityViewCartBindingImpl;
 import in.nafj.databinding.ActivityViewProductBindingImpl;
 import in.nafj.databinding.FragmentRemoveItemOrderListBindingImpl;
 import in.nafj.databinding.ToolbarHomeBindingImpl;
+import in.nafj.databinding.ViewCartSingleBindingImpl;
 import in.nafj.databinding.ViewCategorySingleBindingImpl;
+import in.nafj.databinding.ViewNotificationSingleBindingImpl;
 import in.nafj.databinding.ViewProductSingleBindingImpl;
 import in.nafj.databinding.ViewSubCategorySingleBindingImpl;
 import java.lang.IllegalArgumentException;
@@ -59,13 +61,17 @@ public class DataBinderMapperImpl extends DataBinderMapper {
 
   private static final int LAYOUT_TOOLBARHOME = 13;
 
-  private static final int LAYOUT_VIEWCATEGORYSINGLE = 14;
+  private static final int LAYOUT_VIEWCARTSINGLE = 14;
 
-  private static final int LAYOUT_VIEWPRODUCTSINGLE = 15;
+  private static final int LAYOUT_VIEWCATEGORYSINGLE = 15;
 
-  private static final int LAYOUT_VIEWSUBCATEGORYSINGLE = 16;
+  private static final int LAYOUT_VIEWNOTIFICATIONSINGLE = 16;
 
-  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(16);
+  private static final int LAYOUT_VIEWPRODUCTSINGLE = 17;
+
+  private static final int LAYOUT_VIEWSUBCATEGORYSINGLE = 18;
+
+  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(18);
 
   static {
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.activity_category_listing, LAYOUT_ACTIVITYCATEGORYLISTING);
@@ -81,7 +87,9 @@ public class DataBinderMapperImpl extends DataBinderMapper {
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.activity_view_product, LAYOUT_ACTIVITYVIEWPRODUCT);
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.fragment_remove_item_order_list, LAYOUT_FRAGMENTREMOVEITEMORDERLIST);
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.toolbar_home, LAYOUT_TOOLBARHOME);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.view_cart_single, LAYOUT_VIEWCARTSINGLE);
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.view_category_single, LAYOUT_VIEWCATEGORYSINGLE);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.view_notification_single, LAYOUT_VIEWNOTIFICATIONSINGLE);
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.view_product_single, LAYOUT_VIEWPRODUCTSINGLE);
     INTERNAL_LAYOUT_ID_LOOKUP.put(in.nafj.R.layout.view_sub_category_single, LAYOUT_VIEWSUBCATEGORYSINGLE);
   }
@@ -173,11 +181,23 @@ public class DataBinderMapperImpl extends DataBinderMapper {
           }
           throw new IllegalArgumentException("The tag for toolbar_home is invalid. Received: " + tag);
         }
+        case  LAYOUT_VIEWCARTSINGLE: {
+          if ("layout/view_cart_single_0".equals(tag)) {
+            return new ViewCartSingleBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for view_cart_single is invalid. Received: " + tag);
+        }
         case  LAYOUT_VIEWCATEGORYSINGLE: {
           if ("layout/view_category_single_0".equals(tag)) {
             return new ViewCategorySingleBindingImpl(component, view);
           }
           throw new IllegalArgumentException("The tag for view_category_single is invalid. Received: " + tag);
+        }
+        case  LAYOUT_VIEWNOTIFICATIONSINGLE: {
+          if ("layout/view_notification_single_0".equals(tag)) {
+            return new ViewNotificationSingleBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for view_notification_single is invalid. Received: " + tag);
         }
         case  LAYOUT_VIEWPRODUCTSINGLE: {
           if ("layout/view_product_single_0".equals(tag)) {
@@ -244,7 +264,7 @@ public class DataBinderMapperImpl extends DataBinderMapper {
   }
 
   private static class InnerLayoutIdLookup {
-    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(16);
+    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(18);
 
     static {
       sKeys.put("layout/activity_category_listing_0", in.nafj.R.layout.activity_category_listing);
@@ -260,7 +280,9 @@ public class DataBinderMapperImpl extends DataBinderMapper {
       sKeys.put("layout/activity_view_product_0", in.nafj.R.layout.activity_view_product);
       sKeys.put("layout/fragment_remove_item_order_list_0", in.nafj.R.layout.fragment_remove_item_order_list);
       sKeys.put("layout/toolbar_home_0", in.nafj.R.layout.toolbar_home);
+      sKeys.put("layout/view_cart_single_0", in.nafj.R.layout.view_cart_single);
       sKeys.put("layout/view_category_single_0", in.nafj.R.layout.view_category_single);
+      sKeys.put("layout/view_notification_single_0", in.nafj.R.layout.view_notification_single);
       sKeys.put("layout/view_product_single_0", in.nafj.R.layout.view_product_single);
       sKeys.put("layout/view_sub_category_single_0", in.nafj.R.layout.view_sub_category_single);
     }

@@ -6,19 +6,50 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.recyclerview.widget.RecyclerView;
 import in.nafj.R;
 import java.lang.Deprecated;
 import java.lang.Object;
 
 public abstract class ActivityViewCartBinding extends ViewDataBinding {
   @NonNull
+  public final AppCompatTextView noOrders;
+
+  @NonNull
+  public final ConstraintLayout placeOrderBottom;
+
+  @NonNull
+  public final AppCompatButton placeOrderButton;
+
+  @NonNull
+  public final AppCompatTextView totalAmount;
+
+  @NonNull
+  public final AppCompatTextView totalAmountText;
+
+  @NonNull
+  public final RecyclerView viewCartRecycler;
+
+  @NonNull
   public final ToolbarHomeBinding viewCartToolbar;
 
   protected ActivityViewCartBinding(Object _bindingComponent, View _root, int _localFieldCount,
+      AppCompatTextView noOrders, ConstraintLayout placeOrderBottom,
+      AppCompatButton placeOrderButton, AppCompatTextView totalAmount,
+      AppCompatTextView totalAmountText, RecyclerView viewCartRecycler,
       ToolbarHomeBinding viewCartToolbar) {
     super(_bindingComponent, _root, _localFieldCount);
+    this.noOrders = noOrders;
+    this.placeOrderBottom = placeOrderBottom;
+    this.placeOrderButton = placeOrderButton;
+    this.totalAmount = totalAmount;
+    this.totalAmountText = totalAmountText;
+    this.viewCartRecycler = viewCartRecycler;
     this.viewCartToolbar = viewCartToolbar;
   }
 

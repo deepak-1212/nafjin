@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -13,6 +13,78 @@
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/noOrders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/barlow_medium"
+            android:text="@string/cart_is_empty"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewCartToolbar" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/viewCartRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/placeOrderBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewCartToolbar" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/placeOrderBottom"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:elevation="@dimen/textHeaderMargin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/totalAmountText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/barlow_semi_bold"
+                android:gravity="center"
+                android:text="@string/total_amount"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/totalAmount"
+                app:layout_constraintEnd_toStartOf="@+id/placeOrderButton"
+                app:layout_constraintHorizontal_weight="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/totalAmount"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/barlow_semi_bold"
+                android:gravity="center_horizontal"
+                android:text="@string/total_amount"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/placeOrderButton"
+                app:layout_constraintHorizontal_weight="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/totalAmountText" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/placeOrderButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/place_order"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="0.4"
+                app:layout_constraintStart_toEndOf="@+id/totalAmountText"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

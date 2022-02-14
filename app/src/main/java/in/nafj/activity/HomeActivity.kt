@@ -4,12 +4,9 @@ import `in`.nafj.R
 import `in`.nafj.databinding.ActivityCategoryListingBinding
 import `in`.nafj.databinding.ToolbarHomeBinding
 import `in`.nafj.databinding.ViewCategorySingleBinding
-import `in`.nafj.helper.Constants
 import `in`.nafj.helper.ListingResponse
 import `in`.nafj.helper.RetrofitFunctions
 import `in`.nafj.helper.SingleCategoryResponse
-import `in`.nafj.sheets.RemoveItemOrderList
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -81,17 +78,6 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    private val removeItemInterface = object : RemoveItemOrderList.RemoveItemInterface {
-        override fun onRemoveSelected() {
-            Log.i(TAG, "onRemoveSelected: remove item selected")
-
-        }
-
-        override fun onRemoveCancelled() {
-            Log.i(TAG, "onRemoveCancelled: selected")
-        }
-
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,7 +104,7 @@ class HomeActivity : AppCompatActivity() {
             fragment.show(supportFragmentManager, TAG)*/
         }
 
-        sharedPreferences = application.getSharedPreferences(
+        /*sharedPreferences = application.getSharedPreferences(
             Constants.sharedPrefFile,
             Context.MODE_PRIVATE
         )
@@ -126,7 +112,7 @@ class HomeActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putBoolean("loginStatus", true)
         editor.putString("loginNumber", "8898310860")
-        editor.apply()
+        editor.apply()*/
 
 
     }

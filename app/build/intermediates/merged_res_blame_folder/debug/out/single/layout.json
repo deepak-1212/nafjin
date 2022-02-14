@@ -4,12 +4,20 @@
         "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\activity_sign_up.xml"
     },
     {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\view_notification_single.xml",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\view_notification_single.xml"
+    },
+    {
         "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_order_listing.xml",
         "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\activity_order_listing.xml"
     },
     {
         "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_view_product.xml",
         "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\activity_view_product.xml"
+    },
+    {
+        "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\view_cart_single.xml",
+        "source": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\src\\main\\res\\layout\\view_cart_single.xml"
     },
     {
         "merged": "E:\\AndroidProjects\\Freelancing Projects\\Nafjin_git\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_view_cart.xml",

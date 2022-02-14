@@ -2468,6 +2468,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable close
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -2655,6 +2656,7 @@ id cancelRemoveItem
 id cancel_action
 id cancel_button
 id carryVelocity
+id cartItemImage
 id categoryImage
 id categoryListing
 id categoryName
@@ -2871,11 +2873,13 @@ id never
 id neverCompleteToEnd
 id neverCompleteToStart
 id nextButton
+id noOrders
 id noScroll
 id noState
 id none
 id normal
 id north
+id notificationList
 id notificationListingToolbar
 id notification_background
 id notification_main_column
@@ -2910,19 +2914,24 @@ id pathRelative
 id peekHeight
 id percent
 id pin
+id placeOrderBottom
+id placeOrderButton
 id position
 id postLayout
 id prefix
+id productCode
 id productImage
 id productListing
 id productListingToolbar
 id productName
+id productNotificationTime
 id progress_circular
 id progress_horizontal
 id quantityText
 id radio
 id ratio
 id rectangles
+id removeItem
 id removeItemHeader
 id removeItemImage
 id removeItemSubHeader
@@ -3048,6 +3057,7 @@ id toggle
 id toolbar
 id top
 id topPanel
+id totalAmount
 id totalAmountText
 id totalQuantityText
 id totalQuantityValue
@@ -3066,6 +3076,7 @@ id unlabeled
 id up
 id useLogo
 id vertical_only
+id viewCartRecycler
 id viewCartToolbar
 id viewProductCategory
 id viewProductDescription
@@ -3286,7 +3297,9 @@ layout text_view_with_line_height_from_style
 layout text_view_with_theme_line_height
 layout text_view_without_line_height
 layout toolbar_home
+layout view_cart_single
 layout view_category_single
+layout view_notification_single
 layout view_product_single
 layout view_sub_category_single
 menu example_menu
@@ -3332,6 +3345,7 @@ string are_you_sure_to_remove_this_item
 string bottom_sheet_behavior
 string bottomsheet_action_expand_halfway
 string cancel
+string cart_is_empty
 string category_listing
 string character_counter_content_description
 string character_counter_overflowed_content_description
@@ -3447,6 +3461,7 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string place_order
 string product_listing
 string project_id
 string quantity

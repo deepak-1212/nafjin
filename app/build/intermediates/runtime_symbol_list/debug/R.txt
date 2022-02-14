@@ -2467,6 +2467,7 @@ int drawable btn_radio_off_mtrl 0x7f07005e
 int drawable btn_radio_off_to_on_mtrl_animation 0x7f07005f
 int drawable btn_radio_on_mtrl 0x7f070060
 int drawable btn_radio_on_to_off_mtrl_animation 0x7f070061
+int drawable close 0x7f0700a4
 int drawable design_fab_background 0x7f070062
 int drawable design_ic_visibility 0x7f070063
 int drawable design_ic_visibility_off 0x7f070064
@@ -2654,6 +2655,7 @@ int id cancelRemoveItem 0x7f09006e
 int id cancel_action 0x7f09006f
 int id cancel_button 0x7f090070
 int id carryVelocity 0x7f090071
+int id cartItemImage 0x7f09022a
 int id categoryImage 0x7f090072
 int id categoryListing 0x7f090073
 int id categoryName 0x7f090074
@@ -2870,11 +2872,13 @@ int id never 0x7f090146
 int id neverCompleteToEnd 0x7f090147
 int id neverCompleteToStart 0x7f090148
 int id nextButton 0x7f090149
+int id noOrders 0x7f090225
 int id noScroll 0x7f09014a
 int id noState 0x7f09014b
 int id none 0x7f09014c
 int id normal 0x7f09014d
 int id north 0x7f09014e
+int id notificationList 0x7f09022c
 int id notificationListingToolbar 0x7f09014f
 int id notification_background 0x7f090150
 int id notification_main_column 0x7f090151
@@ -2909,19 +2913,24 @@ int id pathRelative 0x7f09016d
 int id peekHeight 0x7f09016e
 int id percent 0x7f09016f
 int id pin 0x7f090170
+int id placeOrderBottom 0x7f090226
+int id placeOrderButton 0x7f090227
 int id position 0x7f090171
 int id postLayout 0x7f090172
 int id prefix 0x7f090173
+int id productCode 0x7f09022d
 int id productImage 0x7f090174
 int id productListing 0x7f090175
 int id productListingToolbar 0x7f090176
 int id productName 0x7f090177
+int id productNotificationTime 0x7f09022e
 int id progress_circular 0x7f090178
 int id progress_horizontal 0x7f090179
 int id quantityText 0x7f09017a
 int id radio 0x7f09017b
 int id ratio 0x7f09017c
 int id rectangles 0x7f09017d
+int id removeItem 0x7f09022b
 int id removeItemHeader 0x7f09017e
 int id removeItemImage 0x7f09017f
 int id removeItemSubHeader 0x7f090180
@@ -3047,6 +3056,7 @@ int id toggle 0x7f0901f7
 int id toolbar 0x7f0901f8
 int id top 0x7f0901f9
 int id topPanel 0x7f0901fa
+int id totalAmount 0x7f090228
 int id totalAmountText 0x7f0901fb
 int id totalQuantityText 0x7f0901fc
 int id totalQuantityValue 0x7f0901fd
@@ -3065,6 +3075,7 @@ int id unlabeled 0x7f090209
 int id up 0x7f09020a
 int id useLogo 0x7f09020b
 int id vertical_only 0x7f09020c
+int id viewCartRecycler 0x7f090229
 int id viewCartToolbar 0x7f09020d
 int id viewProductCategory 0x7f09020e
 int id viewProductDescription 0x7f09020f
@@ -3285,7 +3296,9 @@ int layout text_view_with_line_height_from_style 0x7f0c0086
 int layout text_view_with_theme_line_height 0x7f0c0087
 int layout text_view_without_line_height 0x7f0c0088
 int layout toolbar_home 0x7f0c0089
+int layout view_cart_single 0x7f0c008d
 int layout view_category_single 0x7f0c008a
+int layout view_notification_single 0x7f0c008e
 int layout view_product_single 0x7f0c008b
 int layout view_sub_category_single 0x7f0c008c
 int menu example_menu 0x7f0d0000
@@ -3331,6 +3344,7 @@ int string are_you_sure_to_remove_this_item 0x7f100022
 int string bottom_sheet_behavior 0x7f100023
 int string bottomsheet_action_expand_halfway 0x7f100024
 int string cancel 0x7f100025
+int string cart_is_empty 0x7f1000a5
 int string category_listing 0x7f100026
 int string character_counter_content_description 0x7f100027
 int string character_counter_overflowed_content_description 0x7f100028
@@ -3446,6 +3460,7 @@ int string path_password_eye 0x7f100095
 int string path_password_eye_mask_strike_through 0x7f100096
 int string path_password_eye_mask_visible 0x7f100097
 int string path_password_strike_through 0x7f100098
+int string place_order 0x7f1000a6
 int string product_listing 0x7f100099
 int string project_id 0x7f10009a
 int string quantity 0x7f10009b
