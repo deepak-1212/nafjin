@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/productName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/barlow_regular"
+        android:padding="@dimen/textLightHeaderPadding"
+        android:textColor="@color/black"
+        android:textSize="13sp" />
+</layout>
