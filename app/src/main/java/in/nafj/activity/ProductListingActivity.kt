@@ -6,6 +6,9 @@ import `in`.nafj.databinding.ToolbarHomeBinding
 import `in`.nafj.databinding.ViewProductSingleBinding
 import `in`.nafj.helper.SingleCategoryResponse
 import `in`.nafj.helper.SingleProductResponse
+import `in`.nafj.helper.setImage
+import `in`.nafj.helper.toast
+import `in`.nafj.model.ViewProductModel
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -36,10 +39,10 @@ class ProductListingActivity : AppCompatActivity() {
             position: Int,
             singleProductResponse: SingleProductResponse
         ) {
-            val json = Gson().toJson(singleProductResponse)
+
+            val json = Gson().toJson(ViewProductModel(categoryName, singleProductResponse))
             val intent = Intent(this@ProductListingActivity, ViewProductActivity::class.java)
             intent.putExtra("singleProductResponse", json)
-            intent.putExtra("categoryName", categoryName)
             startActivity(intent)
         }
 
@@ -66,11 +69,16 @@ class ProductListingActivity : AppCompatActivity() {
         toolbarBinding.toolbar.setNavigationIcon(R.drawable.back_arrow)
         toolbarBinding.toolbar.setNavigationOnClickListener { onBackPressed() }
 
-
-        productList.addAll(singleCategoryResponse.categoryProducts)
         binding.productListing.layoutManager = GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)
         productListAdapter = ProductListAdapter(productList, productInterface)
         binding.productListing.adapter = productListAdapter
+
+        productList.addAll(singleCategoryResponse.categoryProducts)
+        productListAdapter.notifyItemRangeInserted(0, productList.size)
+
+        if (productList.isEmpty()) {
+            toast("Products not available!")
+        }
 
         toolbarBinding.notifications.setOnClickListener {
             val viewProductActivity = Intent(this, NotificationListingActivity::class.java)
@@ -119,6 +127,7 @@ class ProductListingActivity : AppCompatActivity() {
             with(subCategoryList[position]) {
 
                 holder.binding.productName.text = title
+                holder.binding.productImage.setImage(this.image)
 
                 holder.binding.root.setOnClickListener {
                     productInterface.onProductSelected(holder.adapterPosition, this)

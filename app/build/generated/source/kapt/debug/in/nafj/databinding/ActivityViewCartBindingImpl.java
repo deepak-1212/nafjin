@@ -18,7 +18,7 @@ public class ActivityViewCartBindingImpl extends ActivityViewCartBinding  {
             new int[] {1},
             new int[] {in.nafj.R.layout.toolbar_home});
         sViewsWithIds = new android.util.SparseIntArray();
-        sViewsWithIds.put(R.id.noOrders, 2);
+        sViewsWithIds.put(R.id.noItemInCart, 2);
         sViewsWithIds.put(R.id.viewCartRecycler, 3);
         sViewsWithIds.put(R.id.placeOrderBottom, 4);
         sViewsWithIds.put(R.id.totalAmountText, 5);

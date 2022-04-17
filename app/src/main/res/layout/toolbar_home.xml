@@ -45,10 +45,11 @@
                 android:padding="8dp"
                 android:src="@drawable/notifications"
                 android:textSize="14sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/shoppingCart"
                 app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="notifications" />
+                android:contentDescription="@string/notifications" />
 
             <ImageView
                 android:id="@+id/shoppingCart"
@@ -62,7 +63,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="cartButton" />
+                android:contentDescription="@string/cartbutton" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

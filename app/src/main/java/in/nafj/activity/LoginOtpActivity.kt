@@ -87,6 +87,7 @@ class LoginOtpActivity : AppCompatActivity(), View.OnClickListener {
             val intent = Intent(this@LoginOtpActivity, HomeActivity::class.java)
 
             activityHome.launch(intent)
+
         }
 
         override fun onOtpVerificationFailed() {

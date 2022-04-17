@@ -1,18 +1,22 @@
 package `in`.nafj.service
 
 import `in`.nafj.R
-import `in`.nafj.activity.HomeActivity
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import `in`.nafj.activity.LockScreenNotificationActivity
+import `in`.nafj.activity.NotificationsDataModel
+import `in`.nafj.database.DatabaseHelper
 import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Build
+import android.os.PowerManager
 import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import java.util.*
 
 
 private const val TAG = "FirebaseMessaging"
@@ -30,78 +34,92 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(p0: RemoteMessage) {
         super.onMessageReceived(p0)
 
-        Log.i(TAG, "onMessageReceived: ${p0.data}")
-        Log.i(TAG, "onMessageReceived Notification: ${p0.notification}")
-
+        
         sendNotification(p0)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun sendNotification(remoteMessage: RemoteMessage) {
-        val notification = remoteMessage.data
-        val intent = Intent(this, HomeActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        val pendingIntent = PendingIntent.getActivity(
-            this, 0, intent,
-            PendingIntent.FLAG_ONE_SHOT
-        )
 
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        try {
+            val data = remoteMessage.data
+            val notificationTitle = data["title"]
+            val notificationBody = data["body"]
+            val sound = data["sound"]
+            val notificationProductId = data["productId"]
+            val notificationProductCategory = data["categoryName"]
+            val notificationProductImage = data["productImage"]
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val db = DatabaseHelper(this)
+            try {
+                db.insertIntoNotification(NotificationsDataModel(
+                    notificationTitle.toString(),
+                    notificationBody.toString(),
+                    notificationProductId!!.toInt(),
+                    notificationProductCategory.toString(),
+                    "",
+                    notificationProductImage.toString()
+                ))
+            } catch (e: Exception) {
+            }
 
-            /* val sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + this.packageName + "/" + R.raw.ringtone)
-             val audioAttributes = AudioAttributes.Builder()
-                 //.setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                 .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE)
-                 .build()*/
-
-            val notificationChannel = NotificationChannel(
-                getString(R.string.app_name),
-                "Test Notifications",
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-            notificationChannel.enableLights(true)
-            notificationChannel.enableVibration(true)
-            notificationChannel.description = "New channel created"
-//            notificationChannel.setSound(sound, audioAttributes)
-
-            notificationManager.createNotificationChannel(notificationChannel)
-        }
-
-        //custom notification view
-        /*val notificationLayout = RemoteViews(this.packageName, R.layout.notification_layout)
-        notificationLayout.setTextViewText(R.id.content_title, notification!!.title)
-        notificationLayout.setTextViewText(R.id.content_body, notification.body)*/
-
-        val notificationBuilder: Notification.Builder = Notification.Builder(this, getString(R.string.app_name))
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle(notification["title"])
-            .setContentText(notification["body"])
-            .setAutoCancel(true)
-            .setOnlyAlertOnce(true)
-            .setContentIntent(pendingIntent)
+            Log.i(TAG, "sendNotification: title: $notificationTitle")
+            Log.i(TAG, "sendNotification: body: $notificationBody")
+            Log.i(TAG, "sendNotification: sound: $sound")
+            val random: Int = Random().nextInt(9999 - 1000) + 1000
+            val fullScreenIntent = Intent(this, LockScreenNotificationActivity::class.java)
+            // Create the TaskStackBuilder
+            val vibrate = longArrayOf(0, 100, 200, 300, 400, 500, 500)
+            val fullScreenPendingIntent =
+                PendingIntent.getActivity(this, random, fullScreenIntent, PendingIntent.FLAG_IMMUTABLE)
+            val alarmSound = Uri.parse("android.resource://" + packageName + "/" + R.raw.ringtone)
+            val notificationBuilder: NotificationCompat.Builder =
+                NotificationCompat.Builder(this, "Nafj_All")
+                    .setSmallIcon(R.drawable.app_logo)
+                    .setContentTitle(notificationTitle)
+                    .setContentText(notificationBody)
+                    .setAutoCancel(true)
+                    .setOnlyAlertOnce(true)
+                    .setSound(alarmSound)
+                    .setVibrate(vibrate)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                    .setFullScreenIntent(fullScreenPendingIntent, true)
 //            .setCustomBigContentView(notificationLayout)
-            .setLargeIcon(
-                BitmapFactory.decodeResource(
-                    this.resources,
-                    R.drawable.ic_launcher_foreground
-                )
-            )
+                    .setLargeIcon(
+                        BitmapFactory.decodeResource(
+                            this.resources,
+                            R.mipmap.app_logo_icon_round
+                        )
+                    )
 
-        val random = Math.random().toInt()
-        notificationManager.notify(random, notificationBuilder.build())
+            if (notificationBody!!.length > 25) {
+                notificationBuilder.setStyle(NotificationCompat.BigTextStyle().bigText(notificationBody))
+            }
+
+            //custom notification view
+            /*val notificationLayout = RemoteViews(this.packageName, R.layout.notification_layout)
+            notificationLayout.setTextViewText(R.id.content_title, notification!!.title)
+            notificationLayout.setTextViewText(R.id.content_body, notification.body)*/
+
+            val powerManager: PowerManager = this.getSystemService(POWER_SERVICE) as PowerManager
+            if (!powerManager.isInteractive) { // if screen is not already on, turn it on (get wake_lock for 10 seconds)
+                val wakeLock = powerManager.newWakeLock(
+                    PowerManager.PARTIAL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP,
+                    "nafj:notification_received"
+                )
+                wakeLock.acquire(10000)
+            }
+
+            with(NotificationManagerCompat.from(this)) {
+                notify(random, notificationBuilder.build())
+            }
 //        playSound()
 
-    }
+        } catch (exception: Exception) {
+            Log.i(TAG, "sendNotification: $exception")
+        }
 
-    private fun playSound() {
-        /*val mediaPlayer = MediaPlayer.create(this, R.raw.ringtone)
-        mediaPlayer.start()
-        mediaPlayer.setOnCompletionListener {
-            mediaPlayer.stop()
-            mediaPlayer.release()
-        }*/
 
     }
 }

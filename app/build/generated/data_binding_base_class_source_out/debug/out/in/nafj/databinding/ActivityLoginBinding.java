@@ -4,14 +4,15 @@ package in.nafj.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.cardview.widget.CardView;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import in.nafj.R;
 import java.lang.Deprecated;
 import java.lang.Object;
@@ -21,30 +22,53 @@ public abstract class ActivityLoginBinding extends ViewDataBinding {
   public final AppIconNameBinding appIconName;
 
   @NonNull
-  public final TextView mobile;
+  public final AppCompatTextView emptyPassword;
 
   @NonNull
-  public final AppCompatEditText mobileNo;
+  public final AppCompatTextView emptyUsername;
 
   @NonNull
-  public final AppCompatButton nextButton;
+  public final TextInputEditText mobileNo;
 
   @NonNull
-  public final TextView prefix;
+  public final TextInputEditText passwordLogin;
+
+  @NonNull
+  public final CardView passwordLoginTIL;
+
+  @NonNull
+  public final TextInputLayout passwordLoginTIL1;
+
+  @NonNull
+  public final AppCompatButton submitLogin;
 
   @NonNull
   public final AppCompatTextView submitNumberText;
 
+  @NonNull
+  public final CardView usernameLoginTIL;
+
+  @NonNull
+  public final TextInputLayout usernameLoginTIL1;
+
   protected ActivityLoginBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      AppIconNameBinding appIconName, TextView mobile, AppCompatEditText mobileNo,
-      AppCompatButton nextButton, TextView prefix, AppCompatTextView submitNumberText) {
+      AppIconNameBinding appIconName, AppCompatTextView emptyPassword,
+      AppCompatTextView emptyUsername, TextInputEditText mobileNo, TextInputEditText passwordLogin,
+      CardView passwordLoginTIL, TextInputLayout passwordLoginTIL1, AppCompatButton submitLogin,
+      AppCompatTextView submitNumberText, CardView usernameLoginTIL,
+      TextInputLayout usernameLoginTIL1) {
     super(_bindingComponent, _root, _localFieldCount);
     this.appIconName = appIconName;
-    this.mobile = mobile;
+    this.emptyPassword = emptyPassword;
+    this.emptyUsername = emptyUsername;
     this.mobileNo = mobileNo;
-    this.nextButton = nextButton;
-    this.prefix = prefix;
+    this.passwordLogin = passwordLogin;
+    this.passwordLoginTIL = passwordLoginTIL;
+    this.passwordLoginTIL1 = passwordLoginTIL1;
+    this.submitLogin = submitLogin;
     this.submitNumberText = submitNumberText;
+    this.usernameLoginTIL = usernameLoginTIL;
+    this.usernameLoginTIL1 = usernameLoginTIL1;
   }
 
   @NonNull

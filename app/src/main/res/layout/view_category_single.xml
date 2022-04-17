@@ -10,7 +10,7 @@
             android:id="@+id/categoryImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
+            android:minHeight="150dp"
             android:contentDescription="@string/category_listing"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"

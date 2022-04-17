@@ -20,11 +20,16 @@ public abstract class ActivityCategoryListingBinding extends ViewDataBinding {
   @NonNull
   public final ToolbarHomeBinding homeToolbar;
 
+  @NonNull
+  public final RecyclerView productListing;
+
   protected ActivityCategoryListingBinding(Object _bindingComponent, View _root,
-      int _localFieldCount, RecyclerView categoryListing, ToolbarHomeBinding homeToolbar) {
+      int _localFieldCount, RecyclerView categoryListing, ToolbarHomeBinding homeToolbar,
+      RecyclerView productListing) {
     super(_bindingComponent, _root, _localFieldCount);
     this.categoryListing = categoryListing;
     this.homeToolbar = homeToolbar;
+    this.productListing = productListing;
   }
 
   @NonNull

@@ -4,14 +4,20 @@ import `in`.nafj.R
 import `in`.nafj.database.DatabaseHelper
 import `in`.nafj.databinding.ActivityLoginBinding
 import `in`.nafj.helper.Constants
+import `in`.nafj.helper.RetrofitFunctions
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
@@ -22,9 +28,39 @@ import java.util.*
 
 private const val TAG = "LoginActivity"
 
+interface LoginWithPasswordInterface {
+    fun onLoginSuccess(number: String)
+    fun onLoginFailure(message: String)
+}
+
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
+    private val loginWithPasswordInterface = object : LoginWithPasswordInterface {
+        override fun onLoginSuccess(number: String) {
+            showProgressBar(false)
+
+            val editor = sharedPreferences.edit()
+            editor.putBoolean("loginStatus", true)
+            editor.putString("loginNumber", number)
+            editor.apply()
+
+            showProgressBar(false)
+            val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        override fun onLoginFailure(message: String) {
+            showProgressBar(false)
+            Log.i(TAG, "onLoginFailure: $message")
+            binding.emptyPassword.visibility = View.VISIBLE
+            binding.emptyPassword.text = message
+        }
+
+    }
+
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var progressDialog: ProgressDialog
     private var firebaseToken = ""
     private val activityLoginActivity =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -49,7 +85,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             Context.MODE_PRIVATE
         )
 
-        binding.nextButton.setOnClickListener(this)
+        binding.submitLogin.setOnClickListener(this)
+        createNotificationChannel()
+
+//        val loginStatus = true
         val loginStatus = sharedPreferences.getBoolean("loginStatus", false)
         if (loginStatus) {
             val editor = sharedPreferences.edit()
@@ -57,21 +96,64 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             editor.apply()
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
+            finish()
+        }
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationChannel = NotificationChannel(
+                "Nafj_All",
+                "All Notifications",
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            notificationChannel.enableLights(true)
+            notificationChannel.enableVibration(true)
+            notificationChannel.description = "All the notifications will be shown in this category"
+            notificationChannel.lockscreenVisibility = NotificationCompat.VISIBILITY_PUBLIC
+
+
+            (getSystemService(NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(
+                notificationChannel
+            )
         }
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.nextButton -> {
-                if (binding.mobileNo.text?.length == 10) {
-                    Log.i(TAG, "onClick: ${binding.mobileNo.text}")
-                    val intent = Intent(this, LoginOtpActivity::class.java)
-                    intent.putExtra("number", binding.mobileNo.text.toString())
-                    intent.putExtra("firebaseToken", firebaseToken)
-                    activityLoginActivity.launch(intent)
-                } else {
-                    binding.mobileNo.error = "Please enter a correct number"
+            R.id.submitLogin -> {
+
+                binding.emptyPassword.visibility = View.GONE
+                val number = binding.mobileNo.text.toString().trim()
+                val password = binding.passwordLogin.text.toString().trim()
+                if (number.isEmpty()) {
+                    binding.mobileNo.error = "Mobile number cannot be empty"
+                    return
                 }
+
+                if (password.isEmpty()) {
+                    binding.passwordLogin.error = "Password cannot be empty"
+                    return
+                }
+
+                if (number.length != 10) {
+                    binding.mobileNo.error = "Invalid number, please enter a mobile number"
+                    return
+                }
+
+                if (password.length < 6) {
+                    binding.passwordLogin.error = "Password must be at least 6 characters long"
+                    return
+                }
+                progressDialog = ProgressDialog(this)
+                progressDialog.setCancelable(false)
+                progressDialog.setTitle("Logging in")
+                RetrofitFunctions.loginWithPassword(
+                    number,
+                    password,
+                    loginWithPasswordInterface,
+                    firebaseToken
+                )
             }
         }
     }
@@ -86,6 +168,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             // Get new FCM registration token
             firebaseToken = task.result
         })
+    }
+
+    private fun showProgressBar(status: Boolean) {
+        if (status) {
+            progressDialog.show()
+        } else {
+            progressDialog.dismiss()
+        }
     }
 
     fun getMacAddress(): String {

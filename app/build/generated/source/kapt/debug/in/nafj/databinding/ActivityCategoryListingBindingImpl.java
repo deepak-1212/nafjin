@@ -12,13 +12,14 @@ public class ActivityCategoryListingBindingImpl extends ActivityCategoryListingB
     @Nullable
     private static final android.util.SparseIntArray sViewsWithIds;
     static {
-        sIncludes = new androidx.databinding.ViewDataBinding.IncludedLayouts(3);
+        sIncludes = new androidx.databinding.ViewDataBinding.IncludedLayouts(4);
         sIncludes.setIncludes(0, 
             new String[] {"toolbar_home"},
             new int[] {1},
             new int[] {in.nafj.R.layout.toolbar_home});
         sViewsWithIds = new android.util.SparseIntArray();
-        sViewsWithIds.put(R.id.categoryListing, 2);
+        sViewsWithIds.put(R.id.productListing, 2);
+        sViewsWithIds.put(R.id.categoryListing, 3);
     }
     // views
     @NonNull
@@ -29,12 +30,13 @@ public class ActivityCategoryListingBindingImpl extends ActivityCategoryListingB
     // Inverse Binding Event Handlers
 
     public ActivityCategoryListingBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 3, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 4, sIncludes, sViewsWithIds));
     }
     private ActivityCategoryListingBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 1
-            , (androidx.recyclerview.widget.RecyclerView) bindings[2]
+            , (androidx.recyclerview.widget.RecyclerView) bindings[3]
             , (in.nafj.databinding.ToolbarHomeBinding) bindings[1]
+            , (androidx.recyclerview.widget.RecyclerView) bindings[2]
             );
         setContainedBinding(this.homeToolbar);
         this.mboundView0 = (androidx.constraintlayout.widget.ConstraintLayout) bindings[0];

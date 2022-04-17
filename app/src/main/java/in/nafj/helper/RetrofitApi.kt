@@ -1,5 +1,8 @@
 package `in`.nafj.helper
 
+import `in`.nafj.model.DeviceTokenModel
+import `in`.nafj.model.DeviceTokenResponse
+import `in`.nafj.model.LoginWithPasswordModel
 import `in`.nafj.model.StoreOtpModel
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -12,6 +15,10 @@ interface RetrofitApi {
 
     @POST("login_register.php")
     fun loginRegister(@Body storeOtpModel: StoreOtpModel): Call<CreateRecordInServerResponse>
+
+    @POST("login_with_password.php")
+    fun loginWithPassword(@Body loginWithPasswordModel: LoginWithPasswordModel): Call<CreateRecordInServerResponse>
+
 
     @POST("verifyOtp.php")
     fun verifyOtp(@Body storeOtpModel: StoreOtpModel): Call<VerifyOtpResponse>
@@ -30,5 +37,10 @@ interface RetrofitApi {
         @Query("entityid") entityid: String?,
         @Query("tempid") tempid: String?
     ): Call<ResponseBody>
+
+    @POST("deviceToken.php")
+    fun deviceToken(
+        @Body deviceTokenModel: DeviceTokenModel
+    ): Call<DeviceTokenResponse>
 
 }

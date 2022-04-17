@@ -18,4 +18,9 @@
     <dimen name="bottom_sheet_margin">16dp</dimen>
     <dimen name="toolbar_elevation">20dp</dimen>
 
+
+    <dimen name="shadow_input">6dp</dimen>
+    <dimen name="_14sdp">14sp</dimen>
+    <dimen name="_24sdp">24dp</dimen>
+
 </resources>

@@ -14,7 +14,7 @@
             android:layout_height="?android:attr/actionBarSize" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/noOrders"
+            android:id="@+id/noItemInCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/barlow_medium"

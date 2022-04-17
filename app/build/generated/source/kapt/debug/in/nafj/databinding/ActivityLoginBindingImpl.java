@@ -14,35 +14,49 @@ public class ActivityLoginBindingImpl extends ActivityLoginBinding  {
     static {
         sIncludes = null;
         sViewsWithIds = new android.util.SparseIntArray();
-        sViewsWithIds.put(R.id.appIconName, 1);
-        sViewsWithIds.put(R.id.submitNumberText, 2);
-        sViewsWithIds.put(R.id.mobile, 3);
-        sViewsWithIds.put(R.id.mobile_no, 4);
-        sViewsWithIds.put(R.id.prefix, 5);
-        sViewsWithIds.put(R.id.nextButton, 6);
+        sViewsWithIds.put(R.id.appIconName, 2);
+        sViewsWithIds.put(R.id.submitNumberText, 3);
+        sViewsWithIds.put(R.id.usernameLoginTIL, 4);
+        sViewsWithIds.put(R.id.usernameLoginTIL1, 5);
+        sViewsWithIds.put(R.id.mobileNo, 6);
+        sViewsWithIds.put(R.id.emptyUsername, 7);
+        sViewsWithIds.put(R.id.passwordLoginTIL, 8);
+        sViewsWithIds.put(R.id.passwordLoginTIL1, 9);
+        sViewsWithIds.put(R.id.passwordLogin, 10);
+        sViewsWithIds.put(R.id.emptyPassword, 11);
+        sViewsWithIds.put(R.id.submitLogin, 12);
     }
     // views
     @NonNull
-    private final androidx.constraintlayout.widget.ConstraintLayout mboundView0;
+    private final android.widget.ScrollView mboundView0;
+    @NonNull
+    private final androidx.constraintlayout.widget.ConstraintLayout mboundView1;
     // variables
     // values
     // listeners
     // Inverse Binding Event Handlers
 
     public ActivityLoginBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 7, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 13, sIncludes, sViewsWithIds));
     }
     private ActivityLoginBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
-            , (bindings[1] != null) ? in.nafj.databinding.AppIconNameBinding.bind((android.view.View) bindings[1]) : null
-            , (android.widget.TextView) bindings[3]
-            , (androidx.appcompat.widget.AppCompatEditText) bindings[4]
-            , (androidx.appcompat.widget.AppCompatButton) bindings[6]
-            , (android.widget.TextView) bindings[5]
-            , (androidx.appcompat.widget.AppCompatTextView) bindings[2]
+            , (bindings[2] != null) ? in.nafj.databinding.AppIconNameBinding.bind((android.view.View) bindings[2]) : null
+            , (androidx.appcompat.widget.AppCompatTextView) bindings[11]
+            , (androidx.appcompat.widget.AppCompatTextView) bindings[7]
+            , (com.google.android.material.textfield.TextInputEditText) bindings[6]
+            , (com.google.android.material.textfield.TextInputEditText) bindings[10]
+            , (androidx.cardview.widget.CardView) bindings[8]
+            , (com.google.android.material.textfield.TextInputLayout) bindings[9]
+            , (androidx.appcompat.widget.AppCompatButton) bindings[12]
+            , (androidx.appcompat.widget.AppCompatTextView) bindings[3]
+            , (androidx.cardview.widget.CardView) bindings[4]
+            , (com.google.android.material.textfield.TextInputLayout) bindings[5]
             );
-        this.mboundView0 = (androidx.constraintlayout.widget.ConstraintLayout) bindings[0];
+        this.mboundView0 = (android.widget.ScrollView) bindings[0];
         this.mboundView0.setTag(null);
+        this.mboundView1 = (androidx.constraintlayout.widget.ConstraintLayout) bindings[1];
+        this.mboundView1.setTag(null);
         setRootTag(root);
         // listeners
         invalidateAll();

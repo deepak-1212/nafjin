@@ -24,5 +24,11 @@
         <item name="android:background">@drawable/white_box_without_border</item>
     </style>
 
+    <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="hintTextColor">@color/textInput</item>
+        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+    </style>
 
 </resources>

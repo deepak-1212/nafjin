@@ -13,7 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-data class NotificationsDataModel(val notificationName: String, val notificationProductId: Int, val notificationProductCategory: String, val notificationTime: String)
+data class NotificationsDataModel(val notificationTitle: String, val notificationBody: String, val notificationProductId: Int, val notificationProductCategory: String, val notificationTime: String, val notificationProductImage: String)
 
 private const val TAG = "Notifications"
 class NotificationListingActivity : AppCompatActivity() {
@@ -38,16 +38,13 @@ class NotificationListingActivity : AppCompatActivity() {
         toolbarHomeBinding.notifications.visibility = View.GONE
         toolbarHomeBinding.headerTextView.text = "Notifications"
 
-        notificationList.add(NotificationsDataModel("Abcd", 123, "pendant", "2 days ago"))
-        notificationList.add(NotificationsDataModel("edgh", 124, "Jwellery set", "1 days ago"))
-
         val notificationAdapter = NotificationAdapter()
         binding.notificationList.layoutManager = LinearLayoutManager(this)
         binding.notificationList.adapter = notificationAdapter
 
     }
 
-    inner class NotificationAdapter() : RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
+    inner class NotificationAdapter : RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
 
         inner class ViewHolder(val binding: ViewNotificationSingleBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -63,7 +60,7 @@ class NotificationListingActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             with(notificationList[position]) {
-                holder.binding.productName.text = this.notificationName
+                holder.binding.productName.text = this.notificationTitle
                 holder.binding.productCode.text = this.notificationProductCategory
                 holder.binding.productNotificationTime.text = this.notificationTime
 

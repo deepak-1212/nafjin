@@ -3,6 +3,7 @@ package `in`.nafj.sheets
 import `in`.nafj.activity.ViewCartActivity
 import `in`.nafj.activity.ViewCartDataModel
 import `in`.nafj.databinding.FragmentRemoveItemOrderListBinding
+import `in`.nafj.helper.setImage
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +31,8 @@ class RemoveItemOrderList(
         // Inflate the layout for this fragment
 
         binding = FragmentRemoveItemOrderListBinding.inflate(inflater, container, false)
+
+        binding.removeItemImage.setImage(viewCartDataModel.productImage)
 
         binding.cancelRemoveItem.setOnClickListener {
             dismiss()

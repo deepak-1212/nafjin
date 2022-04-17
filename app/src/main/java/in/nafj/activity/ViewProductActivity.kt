@@ -6,6 +6,8 @@ import `in`.nafj.databinding.ActivityViewProductBinding
 import `in`.nafj.databinding.ToolbarHomeBinding
 import `in`.nafj.helper.Constants
 import `in`.nafj.helper.SingleProductResponse
+import `in`.nafj.helper.setImage
+import `in`.nafj.model.ViewProductModel
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -20,7 +22,8 @@ class ViewProductActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityViewProductBinding
     private lateinit var toolbarHomeBinding: ToolbarHomeBinding
-    private lateinit var categoryName: String
+    private lateinit var viewProductModel: ViewProductModel
+    private var categoryName: String = ""
     private var productPrice = 0
     private var totalQuantityCount = 1
     private lateinit var db: DatabaseHelper
@@ -31,9 +34,6 @@ class ViewProductActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_product)
         toolbarHomeBinding = binding.viewProductToolbar
 
-        val json = intent.getStringExtra("singleProductResponse")
-        val singleProductResponse = Gson().fromJson(json, SingleProductResponse::class.java)
-        categoryName = intent.getStringExtra("categoryName")!!
 
         setSupportActionBar(toolbarHomeBinding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -42,9 +42,14 @@ class ViewProductActivity : AppCompatActivity() {
         toolbarHomeBinding.toolbar.setNavigationIcon(R.drawable.back_arrow)
         toolbarHomeBinding.toolbar.setNavigationOnClickListener { onBackPressed() }
 
-        toolbarHomeBinding.headerTextView.text = categoryName
+        if (intent.hasExtra("singleProductResponse")) {
+            val json = intent.getStringExtra("singleProductResponse")
+            viewProductModel = Gson().fromJson(json, ViewProductModel::class.java)
+            categoryName = viewProductModel.categoryName
+            setView(viewProductModel.productList)
+        }
 
-        setView(singleProductResponse)
+        toolbarHomeBinding.headerTextView.text = categoryName
 
         toolbarHomeBinding.notifications.setOnClickListener {
             val viewProductActivity = Intent(this, NotificationListingActivity::class.java)
@@ -72,13 +77,24 @@ class ViewProductActivity : AppCompatActivity() {
         binding.addToCart.setOnClickListener {
             if (!productPresentInCart) {
                 db = DatabaseHelper(this)
-                val userNumber = getSharedPreferences(Constants.sharedPrefFile, Context.MODE_PRIVATE).getString("loginNumber", "")
-                val recordVal = db.insertRowInCart(singleProductResponse, userNumber, totalQuantityCount, categoryName)
+                val userNumber = getSharedPreferences(
+                    Constants.sharedPrefFile,
+                    Context.MODE_PRIVATE
+                ).getString("loginNumber", "")
+                try {
+                    val recordVal = db.insertRowInCart(
+                        viewProductModel.productList,
+                        userNumber,
+                        totalQuantityCount,
+                        categoryName
+                    )
 
-                if (recordVal > 0) {
-                    Toast.makeText(this, "Item added to cart!", Toast.LENGTH_SHORT).show()
-                    binding.addToCart.text = "Go to Cart"
-                    productPresentInCart = true
+                    if (recordVal > 0) {
+                        Toast.makeText(this, "Item added to cart!", Toast.LENGTH_SHORT).show()
+                        binding.addToCart.text = "Go to Cart"
+                        productPresentInCart = true
+                    }
+                } catch (e: Exception) {
                 }
 
             } else {
@@ -89,14 +105,16 @@ class ViewProductActivity : AppCompatActivity() {
         }
 
         db = DatabaseHelper(this)
-        productPresentInCart = db.getProductFromCart(singleProductResponse.postId)
-        if (productPresentInCart ) {
+        productPresentInCart = db.getProductFromCart(viewProductModel.productList.postId)
+        if (productPresentInCart) {
             binding.addToCart.text = "Go to Cart"
         }
 
     }
 
     private fun setView(singleProductResponse: SingleProductResponse) {
+        binding.viewProductImage.setImage(singleProductResponse.image)
+
         val jsonObject = singleProductResponse.productDetails
         val productCode = jsonObject._sku
         productPrice = jsonObject._price
@@ -114,6 +132,7 @@ class ViewProductActivity : AppCompatActivity() {
     private fun setTotalCount() {
         binding.totalQuantityText.text = totalQuantityCount.toString()
     }
+
     private fun setTotalAmount(calculateTotal: Int) {
         binding.totalQuantityValue.text = calculateTotal.toString()
     }

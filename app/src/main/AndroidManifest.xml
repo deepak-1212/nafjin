@@ -3,11 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="in.nafj">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/app_logo_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/app_logo_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nafj"
         android:usesCleartextTraffic="true">
@@ -73,9 +76,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.SignUpActivity"
-            android:exported="true" />
 
         <service
             android:name=".service.MyFirebaseMessagingService"

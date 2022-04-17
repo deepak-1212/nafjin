@@ -28,6 +28,8 @@ data class SingleCategoryResponse(
     val categoryId: String,
     @SerializedName("CategoryName")
     val categoryName: String,
+    @SerializedName("CategoryImage")
+    val categoryImage: String,
     @SerializedName("CategoryProducts")
     val categoryProducts: ArrayList<SingleProductResponse>
 )
@@ -39,6 +41,8 @@ data class SingleProductResponse(
     val desc: String,
     @SerializedName("postId")
     val postId: Int,
+    @SerializedName("image")
+    val image: String,
     @SerializedName("productDetails")
     val productDetails: SingleProductDetail
 )

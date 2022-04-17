@@ -2,6 +2,8 @@ package `in`.nafj.helper
 
 import `in`.nafj.activity.HomeActivity
 import `in`.nafj.activity.LoginOtpActivity
+import `in`.nafj.activity.LoginWithPasswordInterface
+import `in`.nafj.model.LoginWithPasswordModel
 import `in`.nafj.model.StoreOtpModel
 import android.util.Log
 import okhttp3.ResponseBody
@@ -103,6 +105,50 @@ class RetrofitFunctions {
             })
         }
 
+        fun loginWithPassword(
+            passedNumber: String,
+            passedPassword: String,
+            loginWithPasswordInterface: LoginWithPasswordInterface,
+            firebaseToken: String
+        ) {
+            val retrofit = RetrofitClient.getClient()!!
+            val retrofitApi = retrofit.create(RetrofitApi::class.java)
+            val call: Call<CreateRecordInServerResponse> =
+                retrofitApi.loginWithPassword(
+                    LoginWithPasswordModel(
+                        passedNumber,
+                        passedPassword,
+                        firebaseToken
+                    )
+                )
+
+            Log.d(TAG, "onClick: " + call.request().url())
+
+            call.enqueue(object : Callback<CreateRecordInServerResponse?> {
+                override fun onResponse(
+                    call: Call<CreateRecordInServerResponse?>,
+                    response: Response<CreateRecordInServerResponse?>
+                ) {
+                    if (response.code() == 200) {
+                        val createRecordInServerResponse = response.body()!!
+                        if (createRecordInServerResponse.AffectedRows == 1)
+                            loginWithPasswordInterface.onLoginSuccess(passedNumber)
+                        else
+                            loginWithPasswordInterface.onLoginFailure("Incorrect details")
+                    } else {
+                        loginWithPasswordInterface.onLoginFailure("Internet issue")
+                    }
+
+                }
+
+                override fun onFailure(call: Call<CreateRecordInServerResponse?>, t: Throwable) {
+                    Log.d(TAG, "onFailure: " + t.message)
+                    loginWithPasswordInterface.onLoginFailure(t.message!!)
+
+                }
+            })
+        }
+
         fun verifyOtp(
             passedNumber: String,
             verifyOtpInterface: LoginOtpActivity.VerifyOtpInterface,
@@ -127,7 +173,6 @@ class RetrofitFunctions {
                         else
                             verifyOtpInterface.onOtpVerificationFailed()
                     }
-                    verifyOtpInterface.onOtpVerificationFailed()
                 }
 
                 override fun onFailure(call: Call<VerifyOtpResponse?>, t: Throwable) {
@@ -142,8 +187,6 @@ class RetrofitFunctions {
             val retrofit = RetrofitClient.getClient()!!
             val retrofitApi = retrofit.create(RetrofitApi::class.java)
             val call: Call<ListingResponse> = retrofitApi.categoryListing()
-
-            Log.d(TAG, "onClick: " + call.request().url())
 
             call.enqueue(object : Callback<ListingResponse?> {
                 override fun onResponse(

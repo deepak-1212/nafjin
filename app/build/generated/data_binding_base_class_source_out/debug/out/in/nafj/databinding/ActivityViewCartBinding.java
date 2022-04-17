@@ -18,7 +18,7 @@ import java.lang.Object;
 
 public abstract class ActivityViewCartBinding extends ViewDataBinding {
   @NonNull
-  public final AppCompatTextView noOrders;
+  public final AppCompatTextView noItemInCart;
 
   @NonNull
   public final ConstraintLayout placeOrderBottom;
@@ -39,12 +39,12 @@ public abstract class ActivityViewCartBinding extends ViewDataBinding {
   public final ToolbarHomeBinding viewCartToolbar;
 
   protected ActivityViewCartBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      AppCompatTextView noOrders, ConstraintLayout placeOrderBottom,
+      AppCompatTextView noItemInCart, ConstraintLayout placeOrderBottom,
       AppCompatButton placeOrderButton, AppCompatTextView totalAmount,
       AppCompatTextView totalAmountText, RecyclerView viewCartRecycler,
       ToolbarHomeBinding viewCartToolbar) {
     super(_bindingComponent, _root, _localFieldCount);
-    this.noOrders = noOrders;
+    this.noItemInCart = noItemInCart;
     this.placeOrderBottom = placeOrderBottom;
     this.placeOrderButton = placeOrderButton;
     this.totalAmount = totalAmount;
