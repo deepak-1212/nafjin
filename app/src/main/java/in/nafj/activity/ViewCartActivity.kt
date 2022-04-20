@@ -16,6 +16,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -218,15 +219,22 @@ class ViewCartActivity : AppCompatActivity() {
             message.append("Date: $formattedDate\n")
             message.append("Item: ${item.productId} - ${item.productName}\n")
             message.append("Rate: ${item.productPrice}\n")
+            message.append("Image: ${item.productImage}\n")
             message.append("Quantity: ${item.productCartCount}\n")
             message.append("Mobile Number: $number\n\n")
-
         }
         Log.i(TAG, "placeOrderProcess: $message")
-
-        val toNumber = "919892710566" // contains spaces.
-
         try {
+            val toNumber = "919892710566" // Replace with mobile phone number without +Sign or leading zeros, but with country code
+            //Suppose your country is India and your phone number is “xxxxxxxxxx”, then you need to send “91xxxxxxxxxx”.
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("http://api.whatsapp.com/send?phone=$toNumber&text=${message.trim()}")
+            startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        /*try {
             val sendIntent = Intent("android.intent.action.MAIN")
             sendIntent.putExtra("jid", "$toNumber@s.whatsapp.net")
             sendIntent.putExtra(Intent.EXTRA_TEXT, message.toString())
@@ -235,7 +243,7 @@ class ViewCartActivity : AppCompatActivity() {
             sendIntent.type = "text/plain"
             startActivity(sendIntent)
         } catch (e: Exception) {
-        }
+        }*/
 
         val db2 = DatabaseHelper(this)
         db2.clearCart(number)

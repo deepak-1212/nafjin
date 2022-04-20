@@ -1,9 +1,6 @@
 package `in`.nafj.helper
 
-import `in`.nafj.model.DeviceTokenModel
-import `in`.nafj.model.DeviceTokenResponse
-import `in`.nafj.model.LoginWithPasswordModel
-import `in`.nafj.model.StoreOtpModel
+import `in`.nafj.model.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
@@ -41,6 +38,11 @@ interface RetrofitApi {
     @POST("deviceToken.php")
     fun deviceToken(
         @Body deviceTokenModel: DeviceTokenModel
+    ): Call<DeviceTokenResponse>
+
+    @POST("updateProfile.php")
+    fun updateProfile(
+        @Body updateProfileDetailModel: ProfileDetails.UpdateProfileDetailModel
     ): Call<DeviceTokenResponse>
 
 }

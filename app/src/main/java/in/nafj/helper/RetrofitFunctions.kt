@@ -3,7 +3,10 @@ package `in`.nafj.helper
 import `in`.nafj.activity.HomeActivity
 import `in`.nafj.activity.LoginOtpActivity
 import `in`.nafj.activity.LoginWithPasswordInterface
+import `in`.nafj.activity.UpdateProfileInterface
+import `in`.nafj.model.DeviceTokenResponse
 import `in`.nafj.model.LoginWithPasswordModel
+import `in`.nafj.model.ProfileDetails
 import `in`.nafj.model.StoreOtpModel
 import android.util.Log
 import okhttp3.ResponseBody
@@ -37,7 +40,7 @@ class RetrofitFunctions {
             )
 
             Log.d(TAG, "onClick: " + call.request().url())
-
+//            HttpTrustManager.allowAllSSL()
             call.enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
@@ -79,7 +82,7 @@ class RetrofitFunctions {
                 )
 
             Log.d(TAG, "onClick: " + call.request().url())
-
+//            HttpTrustManager.allowAllSSL()
             call.enqueue(object : Callback<CreateRecordInServerResponse?> {
                 override fun onResponse(
                     call: Call<CreateRecordInServerResponse?>,
@@ -124,6 +127,7 @@ class RetrofitFunctions {
 
             Log.d(TAG, "onClick: " + call.request().url())
 
+//            HttpTrustManager.allowAllSSL()
             call.enqueue(object : Callback<CreateRecordInServerResponse?> {
                 override fun onResponse(
                     call: Call<CreateRecordInServerResponse?>,
@@ -132,7 +136,7 @@ class RetrofitFunctions {
                     if (response.code() == 200) {
                         val createRecordInServerResponse = response.body()!!
                         if (createRecordInServerResponse.AffectedRows == 1)
-                            loginWithPasswordInterface.onLoginSuccess(passedNumber)
+                            loginWithPasswordInterface.onLoginSuccess(passedNumber, createRecordInServerResponse.Name, createRecordInServerResponse.Email)
                         else
                             loginWithPasswordInterface.onLoginFailure("Incorrect details")
                     } else {
@@ -160,7 +164,7 @@ class RetrofitFunctions {
                 retrofitApi.verifyOtp(StoreOtpModel(passedNumber, otpEntered))
 
             Log.d(TAG, "onClick: " + call.request().url())
-
+//            HttpTrustManager.allowAllSSL()
             call.enqueue(object : Callback<VerifyOtpResponse?> {
                 override fun onResponse(
                     call: Call<VerifyOtpResponse?>,
@@ -188,6 +192,7 @@ class RetrofitFunctions {
             val retrofitApi = retrofit.create(RetrofitApi::class.java)
             val call: Call<ListingResponse> = retrofitApi.categoryListing()
 
+//            HttpTrustManager.allowAllSSL()
             call.enqueue(object : Callback<ListingResponse?> {
                 override fun onResponse(
                     call: Call<ListingResponse?>,
@@ -203,6 +208,52 @@ class RetrofitFunctions {
                 override fun onFailure(call: Call<ListingResponse?>, t: Throwable) {
                     Log.d(TAG, "onFailure: " + t.message)
                     categoryListingInterface.onListingFailure()
+
+                }
+            })
+        }
+
+        fun updateProfile(
+            number: String,
+            name: String,
+            email: String,
+            updateProfileInterface: UpdateProfileInterface
+        ) {
+            val retrofit = RetrofitClient.getClient()!!
+            val retrofitApi = retrofit.create(RetrofitApi::class.java)
+            val call: Call<DeviceTokenResponse> =
+                retrofitApi.updateProfile(
+                    ProfileDetails.UpdateProfileDetailModel(
+                        name,
+                        number,
+                        email
+                    )
+                )
+
+            Log.d(TAG, "onClick: " + call.request().url())
+
+//            HttpTrustManager.allowAllSSL()
+            call.enqueue(object : Callback<DeviceTokenResponse?> {
+                override fun onResponse(
+                    call: Call<DeviceTokenResponse?>,
+                    response: Response<DeviceTokenResponse?>
+                ) {
+                    Log.i(TAG, "onResponse body: ${response.body()}")
+                    if (response.code() == 200) {
+                        val createRecordInServerResponse = response.body()!!
+                        if (createRecordInServerResponse.AffectedRows == 1)
+                            updateProfileInterface.onUpdateSuccess(number, name, email)
+                        else
+                            updateProfileInterface.onUpdateFailure("No change in data")
+                    } else {
+                        updateProfileInterface.onUpdateFailure("Internet issue")
+                    }
+
+                }
+
+                override fun onFailure(call: Call<DeviceTokenResponse?>, t: Throwable) {
+                    Log.d(TAG, "onFailure: " + t.message)
+                    updateProfileInterface.onUpdateFailure(t.message!!)
 
                 }
             })

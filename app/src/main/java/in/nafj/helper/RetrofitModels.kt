@@ -8,7 +8,9 @@ data class CreateRecordInServerResponse(
     @SerializedName("Contact")
     val Contact: Long,
     @SerializedName("Operation")
-    val Operation: String
+    val Operation: String,
+    val Name: String,
+    val Email: String
 )
 
 data class VerifyOtpResponse(
@@ -43,6 +45,8 @@ data class SingleProductResponse(
     val postId: Int,
     @SerializedName("image")
     val image: String,
+    @SerializedName("categoryName")
+    val productCategoryName: String,
     @SerializedName("productDetails")
     val productDetails: SingleProductDetail
 )

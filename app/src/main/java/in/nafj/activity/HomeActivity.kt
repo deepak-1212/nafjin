@@ -1,10 +1,7 @@
 package `in`.nafj.activity
 
 import `in`.nafj.R
-import `in`.nafj.databinding.ActivityCategoryListingBinding
-import `in`.nafj.databinding.SingleProductSearchViewBinding
-import `in`.nafj.databinding.ToolbarHomeBinding
-import `in`.nafj.databinding.ViewCategorySingleBinding
+import `in`.nafj.databinding.*
 import `in`.nafj.helper.*
 import `in`.nafj.model.DeviceTokenModel
 import `in`.nafj.model.DeviceTokenResponse
@@ -28,6 +25,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.util.*
 
 
 private const val TAG = "HomeActivity"
@@ -52,6 +50,10 @@ class HomeActivity : AppCompatActivity() {
         fun onProductSelected(viewProductModel: ViewProductModel)
     }
 
+    interface SampleProductInterface {
+        fun onProductSelected(singleProductResponse: SingleProductResponse)
+    }
+
     private lateinit var sharedPreferences: SharedPreferences
     private var firebaseToken = ""
     private lateinit var binding: ActivityCategoryListingBinding
@@ -59,8 +61,21 @@ class HomeActivity : AppCompatActivity() {
     private val categoryList = ArrayList<SingleCategoryResponse>()
     private lateinit var categoryListingAdapter: CategoryListingAdapter
     private lateinit var productAdapter: ProductListingAdapter
-
+    private lateinit var sampleProductAdapter: SampleProductListingAdapter
     private lateinit var productsListingForSearch: ArrayList<ViewProductModel>
+    private val sampleProductList = ArrayList<SingleProductResponse>()
+
+    private val sampleProductInterface = object : SampleProductInterface {
+        override fun onProductSelected(singleProductResponse: SingleProductResponse) {
+            Log.i(TAG, "onProductSelected: $singleProductResponse")
+
+            val json = Gson().toJson(ViewProductModel(singleProductResponse.productCategoryName, singleProductResponse))
+            val intent = Intent(this@HomeActivity, ViewProductActivity::class.java)
+            intent.putExtra("singleProductResponse", json)
+            startActivity(intent)
+        }
+
+    }
 
     private val productInterface = object : ProductInterface {
         override fun onProductSelected(viewProductModel: ViewProductModel) {
@@ -98,8 +113,17 @@ class HomeActivity : AppCompatActivity() {
 
             for (categoryDetails in body.categoryDetails) {
                 categoryList.add(categoryDetails)
+                sampleProductList.addAll(categoryDetails.categoryProducts)
                 categoryListingAdapter.notifyItemInserted(categoryList.size)
             }
+            val temp = ArrayList<SingleProductResponse>()
+            getRandomItemFromList(temp)
+
+            sampleProductList.clear()
+            sampleProductList.addAll(temp)
+
+
+            sampleProductAdapter.notifyItemRangeInserted(0, sampleProductList.size)
 
         }
 
@@ -109,20 +133,36 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
+    private fun getRandomItemFromList(temp: ArrayList<SingleProductResponse>) {
+        for (i in 0..11) {
+            val randomValue = Random().nextInt(sampleProductList.size)
+            temp.add(sampleProductList[randomValue])
+        }
+
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        productsListingForSearch = ArrayList()
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_category_listing)
         toolbarBinding = binding.homeToolbar
         toolbarBinding.notifications.visibility = View.GONE
         toolbarBinding.shoppingCart.visibility = View.GONE
         setSupportActionBar(toolbarBinding.toolbar)
+        productsListingForSearch = ArrayList()
+
+        toolbarBinding.hamburger.visibility = View.VISIBLE
 
         sharedPreferences = application.getSharedPreferences(
             Constants.sharedPrefFile,
             Context.MODE_PRIVATE
         )
+
+        toolbarBinding.hamburger.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
 
         RetrofitFunctions.categoryListing(categoryListingInterface)
 
@@ -136,6 +176,10 @@ class HomeActivity : AppCompatActivity() {
         binding.productListing.layoutManager = LinearLayoutManager(this)
         binding.productListing.adapter = productAdapter
 
+        sampleProductAdapter = SampleProductListingAdapter(sampleProductList, sampleProductInterface)
+        binding.sampleProductListing.layoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
+        binding.sampleProductListing.adapter = sampleProductAdapter
+
         retrieveToken()
 
     }
@@ -147,12 +191,14 @@ class HomeActivity : AppCompatActivity() {
         searchView.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
             override fun onViewAttachedToWindow(v: View?) {
                 binding.categoryListing.visibility = View.GONE
+                binding.sampleProductListing.visibility = View.GONE
                 binding.productListing.visibility = View.VISIBLE
 
             }
 
             override fun onViewDetachedFromWindow(v: View?) {
                 binding.categoryListing.visibility = View.VISIBLE
+                binding.sampleProductListing.visibility = View.VISIBLE
                 binding.productListing.visibility = View.GONE
 
             }
@@ -294,6 +340,51 @@ class HomeActivity : AppCompatActivity() {
 
                 holder.binding.root.setOnClickListener {
                     productInterface.onProductSelected(this)
+                }
+            }
+        }
+    }
+
+    inner class SampleProductListingAdapter(
+        private var categoryList: ArrayList<SingleProductResponse>,
+        private val sampleProductInterface: SampleProductInterface
+    ) : RecyclerView.Adapter<SampleProductListingAdapter.SampleViewHolder>() {
+
+        inner class SampleViewHolder(val binding: ItemSampleProductListBinding) :
+            RecyclerView.ViewHolder(binding.root)
+
+        override fun onCreateViewHolder(
+            parent: ViewGroup,
+            viewType: Int
+        ): SampleProductListingAdapter.SampleViewHolder {
+            return SampleViewHolder(
+                ItemSampleProductListBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+        }
+
+        override fun getItemCount() = categoryList.size
+
+        override fun getItemId(position: Int): Long {
+            return position.toLong()
+        }
+
+        override fun getItemViewType(position: Int): Int {
+            return position
+        }
+
+        override fun onBindViewHolder(holder: SampleProductListingAdapter.SampleViewHolder, position: Int) {
+            with(categoryList[position]) {
+
+                holder.binding.productName.text = this.title
+                holder.binding.productImage.setImage(this.image)
+
+                holder.binding.root.setOnClickListener {
+//                    productInterface.onProductSelected()
+                    sampleProductInterface.onProductSelected(this)
                 }
             }
         }

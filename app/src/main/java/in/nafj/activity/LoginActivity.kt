@@ -15,7 +15,6 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.databinding.DataBindingUtil
@@ -29,14 +28,17 @@ import java.util.*
 private const val TAG = "LoginActivity"
 
 interface LoginWithPasswordInterface {
-    fun onLoginSuccess(number: String)
+    fun onLoginSuccess(number: String, name: String, email: String)
     fun onLoginFailure(message: String)
 }
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private val loginWithPasswordInterface = object : LoginWithPasswordInterface {
-        override fun onLoginSuccess(number: String) {
+        override fun onLoginSuccess(number: String, name: String, email: String) {
+            val db = DatabaseHelper(this@LoginActivity)
+            db.insertIntoProfile(number, name, email)
+            db.close()
             showProgressBar(false)
 
             val editor = sharedPreferences.edit()
@@ -62,13 +64,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var progressDialog: ProgressDialog
     private var firebaseToken = ""
-    private val activityLoginActivity =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == RESULT_OK) {
-                val rePassedNumber = it.data?.getStringExtra("number")
-                binding.mobileNo.setText(rePassedNumber.toString())
-            }
-        }
 
     private lateinit var sharedPreferences: SharedPreferences
 
@@ -148,6 +143,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 progressDialog = ProgressDialog(this)
                 progressDialog.setCancelable(false)
                 progressDialog.setTitle("Logging in")
+                progressDialog.show()
+
+
                 RetrofitFunctions.loginWithPassword(
                     number,
                     password,

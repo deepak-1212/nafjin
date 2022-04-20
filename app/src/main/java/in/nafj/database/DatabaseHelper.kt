@@ -3,6 +3,7 @@ package `in`.nafj.database
 import `in`.nafj.activity.NotificationsDataModel
 import `in`.nafj.activity.ViewCartDataModel
 import `in`.nafj.helper.SingleProductResponse
+import `in`.nafj.model.ProfileDetails
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -104,14 +105,25 @@ class DatabaseHelper(private val context: Context) :
     }
 
     fun insertIntoProfile(number: String, name: String, email: String = "") {
-        val db = writableDatabase
-        val contentValues = ContentValues()
-        contentValues.put("user_number", number)
-        contentValues.put("profile_name", name)
-        contentValues.put("profile_email", email)
-        db.insert("ProfileDetails", null, contentValues)
+        val sql = "select profile_name from ProfileDetails where user_number=$number"
+        val cursor = writableDatabase.rawQuery(sql, null)
+        if (cursor.count > 0) {
+            val contentValues = ContentValues()
+            contentValues.put("user_number", number)
+            contentValues.put("profile_name", name)
+            contentValues.put("profile_email", email)
 
-        db.close()
+            writableDatabase.update("ProfileDetails", contentValues, "user_number=?", arrayOf(number))
+        } else {
+            val db = writableDatabase
+            val contentValues = ContentValues()
+            contentValues.put("user_number", number)
+            contentValues.put("profile_name", name)
+            contentValues.put("profile_email", email)
+            db.insert("ProfileDetails", null, contentValues)
+            db.close()
+        }
+        cursor.close()
     }
 
     fun checkNamePresent(number: String) : Boolean {
@@ -133,6 +145,15 @@ class DatabaseHelper(private val context: Context) :
         val cursor = writableDatabase.rawQuery("Select profile_name from ProfileDetails where user_number=$number", null)
         cursor.moveToFirst()
         return cursor.getString(0)
+    }
+
+    fun getProfileDetails(number: String): ProfileDetails.UpdateProfileDetailModel {
+        Log.i(TAG, "getProfileDetails: $number")
+        val cursor = writableDatabase.rawQuery("Select profile_name, profile_email from ProfileDetails where user_number=$number", null)
+        return if (cursor.moveToFirst())
+            ProfileDetails.UpdateProfileDetailModel(cursor.getString(0), number, cursor.getString(1))
+        else
+            ProfileDetails.UpdateProfileDetailModel("", "", "")
     }
 
     fun clearCart(number: String) {
